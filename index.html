@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnostic des institutions d'innovation — Par Hermas / IBUDO</title>
+    <meta name="description" content="Identifiez le profil exact de votre institution d'innovation en 6 questions. Diagnostic gratuit avec recommandations stratégiques personnalisées.">
+    <meta property="og:title" content="Diagnostic des institutions d'innovation">
+    <meta property="og:description" content="Quel est le profil exact de votre institution d'innovation ? Diagnostic gratuit, résultats immédiats, recommandations personnalisées.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Satoshi:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --font-display: 'Instrument Serif', Georgia, serif;
+            --font-body: 'Satoshi', -apple-system, sans-serif;
+            --ink: #0F0F0F; --ink-soft: #1A1917; --ink-card: #1E1E1C; --ink-border: #2E2D2A; --ink-muted: #7A7770;
+            --cream: #F7F5F0; --cream-dim: #EDEBE5; --gold: #C8A55C; --gold-soft: rgba(200,165,92,0.12); --gold-glow: rgba(200,165,92,0.25); --white: #FAFAF8;
+            --bg: #FAFAF8; --surface: #FFFFFF; --surface-hover: #F5F3EE; --surface-selected: #FBF8F0;
+            --border: #E8E5DE; --border-focus: var(--gold);
+            --text-1: #1A1917; --text-2: #6B6860; --text-3: #9E9A92;
+            --accent: #C8A55C; --accent-soft: #F5EDD8; --accent-dark: #A88940;
+            --success: #4CAF50; --success-soft: #ECF5EC; --warning-soft: #FFF8E8;
+            --radius-sm: 10px; --radius-md: 14px; --radius-lg: 20px; --radius-xl: 28px;
+            --ease: cubic-bezier(0.25,0.1,0.25,1); --bounce: cubic-bezier(0.34,1.56,0.64,1);
+        }
+        *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+        body{font-family:var(--font-body);-webkit-font-smoothing:antialiased;background:var(--ink);color:var(--cream);overflow-x:hidden}
+        ::selection{background:var(--gold-soft);color:var(--gold)}
+
+        .landing{min-height:100vh;display:flex;flex-direction:column;position:relative}
+        .landing::before{content:'';position:absolute;top:-20%;left:-10%;width:120%;height:140%;background:radial-gradient(ellipse 60% 50% at 25% 20%,rgba(200,165,92,.06) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 75% 70%,rgba(200,165,92,.04) 0%,transparent 60%);pointer-events:none}
+        .landing::after{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;opacity:.5}
+        .landing-inner{position:relative;z-index:1;flex:1;display:flex;flex-direction:column;justify-content:center;max-width:1100px;margin:0 auto;padding:80px 32px 60px;width:100%}
+
+        .topbar{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 32px;display:flex;justify-content:space-between;align-items:center;background:rgba(15,15,15,.6);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.04)}
+        .topbar-logo{font-family:var(--font-display);font-size:20px;color:var(--cream);text-decoration:none;letter-spacing:-.3px}.topbar-logo span{color:var(--gold)}
+        .topbar-cta{font-family:var(--font-body);font-size:13px;font-weight:600;color:var(--ink);background:var(--gold);border:none;padding:10px 22px;border-radius:100px;cursor:pointer;transition:all .3s var(--ease)}.topbar-cta:hover{background:#D4B46A;transform:translateY(-1px);box-shadow:0 8px 24px rgba(200,165,92,.25)}
+
+        .hero-badge{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:2px;color:var(--gold);margin-bottom:32px;opacity:0;animation:fadeUp .8s .2s var(--ease) forwards}.hero-badge::before{content:'';width:32px;height:1px;background:var(--gold)}
+        .hero-title{font-family:var(--font-display);font-size:clamp(42px,7vw,84px);font-weight:400;line-height:1.05;letter-spacing:-1.5px;color:var(--cream);margin-bottom:32px;max-width:800px;opacity:0;animation:fadeUp .8s .35s var(--ease) forwards}.hero-title em{font-style:italic;color:var(--gold)}
+        .hero-sub{font-size:clamp(16px,2vw,19px);font-weight:300;line-height:1.7;color:var(--ink-muted);max-width:560px;margin-bottom:48px;opacity:0;animation:fadeUp .8s .5s var(--ease) forwards}
+        .hero-actions{display:flex;align-items:center;gap:20px;flex-wrap:wrap;opacity:0;animation:fadeUp .8s .65s var(--ease) forwards}
+        .btn-hero{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-body);font-size:16px;font-weight:600;padding:18px 36px;border-radius:100px;border:none;cursor:pointer;transition:all .3s var(--ease);text-decoration:none}
+        .btn-hero-primary{background:var(--gold);color:var(--ink)}.btn-hero-primary:hover{background:#D4B46A;transform:translateY(-2px);box-shadow:0 12px 32px rgba(200,165,92,.3)}.btn-hero-primary:active{transform:translateY(0)}
+        .btn-hero-ghost{background:transparent;color:var(--ink-muted);border:1px solid var(--ink-border)}.btn-hero-ghost:hover{color:var(--cream);border-color:var(--ink-muted)}
+
+        .features{position:relative;z-index:1;padding:0 32px 100px;max-width:1100px;margin:0 auto;width:100%}
+        .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+        .feature-card{background:var(--ink-card);border:1px solid var(--ink-border);border-radius:var(--radius-lg);padding:32px 28px;transition:all .4s var(--ease);opacity:0;transform:translateY(20px)}
+        .feature-card.visible{opacity:1;transform:translateY(0)}.feature-card:hover{border-color:rgba(200,165,92,.2);transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,.3)}
+        .feature-icon{width:48px;height:48px;border-radius:12px;background:var(--gold-soft);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:20px}
+        .feature-title{font-family:var(--font-display);font-size:22px;color:var(--cream);margin-bottom:10px}
+        .feature-desc{font-size:14px;line-height:1.6;color:var(--ink-muted)}
+
+        .how-section{position:relative;z-index:1;padding:60px 32px 100px;max-width:1100px;margin:0 auto;width:100%}
+        .how-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:32px;margin-top:40px}
+        .how-step{text-align:center;opacity:0;transform:translateY(16px)}.how-step.visible{opacity:1;transform:translateY(0);transition:all .5s var(--ease)}
+        .how-num{font-family:var(--font-display);font-size:48px;color:var(--gold);opacity:.3;line-height:1;margin-bottom:12px}
+        .how-label{font-size:16px;font-weight:600;color:var(--cream);margin-bottom:6px}
+        .how-desc{font-size:13px;color:var(--ink-muted);line-height:1.5}
+
+        .profiles-section{position:relative;z-index:1;padding:80px 32px 60px;max-width:1100px;margin:0 auto;width:100%}
+        .section-label{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:2px;color:var(--gold);margin-bottom:16px;opacity:0;transform:translateY(12px)}.section-label.visible{opacity:1;transform:translateY(0);transition:all .6s var(--ease)}
+        .section-title{font-family:var(--font-display);font-size:clamp(28px,4vw,44px);color:var(--cream);margin-bottom:16px;max-width:520px;letter-spacing:-.5px;opacity:0;transform:translateY(12px)}.section-title.visible{opacity:1;transform:translateY(0);transition:all .6s .1s var(--ease)}
+        .section-subtitle{font-size:15px;line-height:1.6;color:var(--ink-muted);max-width:480px;margin-bottom:40px;opacity:0;transform:translateY(12px)}.section-subtitle.visible{opacity:1;transform:translateY(0);transition:all .6s .15s var(--ease)}
+
+        .marquee-track{overflow:hidden;position:relative;margin:0 -32px}
+        .marquee-track::before,.marquee-track::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none}
+        .marquee-track::before{left:0;background:linear-gradient(90deg,var(--ink),transparent)}.marquee-track::after{right:0;background:linear-gradient(-90deg,var(--ink),transparent)}
+        .marquee-row{display:flex;gap:12px;width:max-content;padding:6px 0}
+        .marquee-row.r1{animation:mq 80s linear infinite}.marquee-row.r2{animation:mq 95s linear infinite reverse}
+        .marquee-row:hover{animation-play-state:paused}
+        .profile-chip{flex:0 0 auto;background:var(--ink-card);border:1px solid var(--ink-border);border-radius:var(--radius-md);padding:14px 18px;min-width:180px;transition:all .3s var(--ease)}
+        .profile-chip:hover{border-color:rgba(200,165,92,.3);background:rgba(200,165,92,.05)}
+        .profile-chip-top{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+        .profile-chip-emoji{font-size:20px}
+        .profile-chip-name{font-family:var(--font-display);font-size:15px;color:var(--cream)}
+        .profile-chip-desc{font-size:11px;color:var(--ink-muted);line-height:1.4}
+        @keyframes mq{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+        .footer-cta{position:relative;z-index:1;text-align:center;padding:80px 32px 120px}
+        .footer-cta-title{font-family:var(--font-display);font-size:clamp(28px,4.5vw,48px);color:var(--cream);margin-bottom:24px;letter-spacing:-.5px}.footer-cta-title em{font-style:italic;color:var(--gold)}
+        .footer-cta p{font-size:16px;color:var(--ink-muted);margin-bottom:36px}
+        .site-footer{position:relative;z-index:1;text-align:center;padding:32px;border-top:1px solid var(--ink-border);font-size:13px;color:var(--ink-muted)}.site-footer a{color:var(--gold);text-decoration:none}.site-footer a:hover{text-decoration:underline}
+
+        /* ===== DIAGNOSTIC ===== */
+        .diagnostic-wrapper{display:none;background:var(--bg);min-height:100vh}.diagnostic-wrapper.active{display:block}
+        .diag-topbar{position:sticky;top:0;z-index:100;padding:16px 24px;background:rgba(250,250,248,.8);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+        .diag-back{display:flex;align-items:center;gap:8px;font-family:var(--font-body);font-size:14px;font-weight:500;color:var(--text-2);background:none;border:none;cursor:pointer;padding:8px 12px;border-radius:8px;transition:all .2s}.diag-back:hover{background:var(--surface-hover);color:var(--text-1)}
+        .diag-progress-mini{font-size:13px;font-weight:500;color:var(--text-3)}
+        .diag-container{max-width:680px;margin:0 auto;padding:40px 20px 80px}
+        .diag-progress-bar{margin-bottom:12px}.diag-progress-meta{display:flex;justify-content:space-between;margin-bottom:8px}
+        .diag-progress-label{font-size:13px;font-weight:600;color:var(--text-2)}.diag-progress-step{font-size:13px;color:var(--text-3)}
+        .diag-progress-track{height:3px;background:var(--border);border-radius:3px;overflow:hidden}
+        .diag-progress-fill{height:100%;background:var(--accent);border-radius:3px;transition:width .5s var(--ease)}
+        .diag-dots{display:flex;justify-content:center;gap:8px;margin-bottom:36px}
+        .diag-dot{width:8px;height:8px;border-radius:50%;background:var(--border);transition:all .3s var(--ease)}.diag-dot.active{background:var(--accent);width:24px;border-radius:4px}.diag-dot.done{background:var(--accent)}
+        .diag-card{background:var(--surface);border-radius:var(--radius-xl);padding:36px;box-shadow:0 2px 12px rgba(0,0,0,.04);border:1px solid var(--border)}
+        .q-section{opacity:0;transform:translateY(10px);animation:dFadeUp .4s var(--ease) forwards}
+        .q-tag{display:inline-block;font-size:11px;font-weight:700;color:var(--accent-dark);background:var(--accent-soft);padding:4px 14px;border-radius:100px;margin-bottom:16px;letter-spacing:1px;text-transform:uppercase}
+        .q-title{font-family:var(--font-display);font-size:clamp(22px,3.5vw,28px);color:var(--text-1);margin-bottom:8px;letter-spacing:-.3px}
+        .q-hint{font-size:14px;color:var(--text-2);margin-bottom:28px;line-height:1.5}
+        .q-options{display:flex;flex-direction:column;gap:8px}
+        .q-opt{display:flex;align-items:center;gap:14px;padding:14px 16px;border:1.5px solid var(--border);border-radius:var(--radius-md);cursor:pointer;transition:all .25s var(--ease);user-select:none}
+        .q-opt:hover{border-color:#D6CFC0;transform:translateY(-1px);box-shadow:0 2px 8px rgba(0,0,0,.03)}
+        .q-opt.on{border-color:var(--accent);background:var(--surface-selected);box-shadow:0 0 0 1px var(--accent)}.q-opt.on:hover{background:#F8F3E6}
+        .q-check{width:22px;height:22px;min-width:22px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;transition:all .3s var(--bounce);background:var(--surface)}
+        .q-opt.on .q-check{border-color:var(--accent);background:var(--accent)}.q-check svg{opacity:0;transform:scale(.5);transition:all .3s var(--bounce)}.q-opt.on .q-check svg{opacity:1;transform:scale(1)}
+        .q-text{flex:1}.q-text-main{font-size:15px;font-weight:500;color:var(--text-1)}.q-text-sub{font-size:13px;color:var(--text-3);margin-top:2px}
+        .q-rank{display:flex;align-items:center;gap:4px;opacity:0;transform:scale(.8);transition:all .3s var(--bounce)}.q-opt.on .q-rank{opacity:1;transform:scale(1)}
+        .q-rank-num{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:white;background:var(--accent)}
+        .q-rank-btns{display:flex;flex-direction:column;gap:2px}
+        .q-rank-btn{width:20px;height:16px;border:none;background:var(--accent-soft);border-radius:4px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;color:var(--accent-dark);font-size:8px;padding:0}
+        .q-rank-btn:hover:not(:disabled){background:var(--accent);color:white}.q-rank-btn:disabled{opacity:.2;cursor:not-allowed}
+        .diag-nav{display:flex;justify-content:space-between;align-items:center;margin-top:28px}
+        .d-btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border:none;border-radius:var(--radius-md);font-family:var(--font-body);font-size:15px;font-weight:600;cursor:pointer;transition:all .25s var(--ease)}
+        .d-btn-primary{background:var(--text-1);color:white}.d-btn-primary:hover:not(:disabled){background:#333;transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,0,0,.12)}
+        .d-btn-secondary{background:transparent;color:var(--text-2)}.d-btn-secondary:hover:not(:disabled){color:var(--text-1);background:var(--surface-hover)}
+        .d-btn:disabled{opacity:.3;cursor:not-allowed}
+
+        .res-section{display:none}.res-section.show{display:block}
+        .res-hero{text-align:center;padding:48px 16px 36px;opacity:0;animation:dFadeUp .6s var(--ease) forwards}
+        .res-badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--success);background:var(--success-soft);padding:6px 16px;border-radius:100px;margin-bottom:24px;letter-spacing:.5px;text-transform:uppercase}
+        .res-name{font-family:var(--font-display);font-size:clamp(28px,5vw,40px);color:var(--text-1);margin-bottom:16px;letter-spacing:-.5px}
+        .res-score{font-size:56px;font-family:var(--font-display);font-weight:400;background:linear-gradient(135deg,var(--accent),var(--accent-dark));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .res-score-label{font-size:12px;color:var(--text-3);text-transform:uppercase;letter-spacing:1.5px;font-weight:600;margin-top:2px}
+        .res-desc{font-size:16px;line-height:1.7;color:var(--text-2);max-width:520px;margin:24px auto 0}
+        .res-card{background:var(--surface);border-radius:var(--radius-lg);padding:28px;margin-top:14px;box-shadow:0 1px 4px rgba(0,0,0,.03);border:1px solid var(--border);opacity:0;transform:translateY(10px)}
+        .res-card:nth-child(1){animation:dFadeUp .5s .05s var(--ease) forwards}.res-card:nth-child(2){animation:dFadeUp .5s .12s var(--ease) forwards}.res-card:nth-child(3){animation:dFadeUp .5s .19s var(--ease) forwards}.res-card:nth-child(4){animation:dFadeUp .5s .26s var(--ease) forwards}.res-card:nth-child(5){animation:dFadeUp .5s .33s var(--ease) forwards}.res-card:nth-child(6){animation:dFadeUp .5s .4s var(--ease) forwards}
+        .res-card-head{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+        .res-card-ico{width:40px;height:40px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:20px}
+        .res-card-ico.gold{background:var(--accent-soft)}.res-card-ico.green{background:var(--success-soft)}.res-card-ico.blue{background:#E8F0FD}.res-card-ico.gray{background:#F0EDEA}
+        .res-card-title{font-family:var(--font-display);font-size:19px;color:var(--text-1)}
+        .res-card ul{list-style:none}.res-card li{padding:10px 0;border-bottom:1px solid #F5F3EE;font-size:15px;color:var(--text-2);line-height:1.5;display:flex;align-items:flex-start;gap:10px}.res-card li:last-child{border-bottom:none;padding-bottom:0}.res-card p{font-size:15px;color:var(--text-2);line-height:1.65}
+        .bar-wrap{margin-top:8px}.bar-label{display:flex;justify-content:space-between;font-size:14px;margin-bottom:4px}.bar-track{height:6px;background:var(--border);border-radius:6px;overflow:hidden}.bar-fill{height:100%;border-radius:6px;background:var(--accent);transition:width 1s var(--ease)}
+        .alt-banner{display:flex;align-items:center;gap:14px;padding:16px 20px;background:var(--warning-soft);border-radius:var(--radius-md);margin-top:14px;opacity:0;animation:dFadeUp .5s .1s var(--ease) forwards}.alt-banner p{font-size:14px;color:var(--text-2);line-height:1.5}.alt-banner strong{color:var(--text-1)}
+        .summary-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}.s-tag{font-size:13px;padding:4px 10px;background:var(--surface-hover);border-radius:100px;color:var(--text-2)}.s-tag.main{background:var(--accent-soft);color:var(--accent-dark);font-weight:600}
+        .btn-reset-full{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:16px;margin-top:20px;background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius-md);font-family:var(--font-body);font-size:15px;font-weight:600;color:var(--text-2);cursor:pointer;transition:all .25s var(--ease);opacity:0;animation:dFadeUp .5s .4s var(--ease) forwards}.btn-reset-full:hover{border-color:var(--text-3);color:var(--text-1);background:var(--surface-hover)}
+        .toast-msg{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--text-1);color:white;padding:14px 24px;border-radius:var(--radius-md);font-size:14px;font-weight:500;box-shadow:0 12px 40px rgba(0,0,0,.15);z-index:1000;transition:transform .4s var(--bounce);pointer-events:none}.toast-msg.on{transform:translateX(-50%) translateY(0)}
+
+        .slide-out-l{animation:soL .25s var(--ease) forwards}.slide-in-r{animation:siR .25s var(--ease) forwards}.slide-out-r{animation:soR .25s var(--ease) forwards}.slide-in-l{animation:siL .25s var(--ease) forwards}
+        @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}@keyframes dFadeUp{to{opacity:1;transform:translateY(0)}}
+        @keyframes soL{to{opacity:0;transform:translateX(-20px)}}@keyframes siR{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
+        @keyframes soR{to{opacity:0;transform:translateX(20px)}}@keyframes siL{from{opacity:0;transform:translateX(-20px)}to{opacity:1;transform:translateX(0)}}
+
+        @media(max-width:640px){.landing-inner{padding:100px 20px 40px}.features,.profiles-section,.how-section{padding-left:20px;padding-right:20px}.diag-card{padding:24px 18px;border-radius:var(--radius-lg)}.d-btn{padding:12px 20px;font-size:14px}.topbar{padding:16px 20px}.how-grid{gap:24px}}
+    </style>
+</head>
+<body>
+
+<div id="landingPage" class="landing">
+    <nav class="topbar">
+        <a href="#" class="topbar-logo">diagnostic<span>.innovation</span></a>
+        <button class="topbar-cta" onclick="startDiagnostic()">Commencer →</button>
+    </nav>
+    <div class="landing-inner">
+        <div class="hero-badge">Outil ouvert &amp; gratuit</div>
+        <h1 class="hero-title">Identifiez le profil<br>exact de votre<br>institution d'<em>innovation</em></h1>
+        <p class="hero-sub">6 questions. Un algorithme de correspondance multi-dimensionnel. Des recommandations stratégiques taillées sur mesure — quelle que soit votre structure.</p>
+        <div class="hero-actions">
+            <button class="btn-hero btn-hero-primary" onclick="startDiagnostic()">Lancer le diagnostic →</button>
+            <a href="#features" class="btn-hero btn-hero-ghost">En savoir plus</a>
+        </div>
+    </div>
+
+    <section class="features" id="features">
+        <div class="features-grid">
+            <div class="feature-card"><div class="feature-icon">⚡</div><div class="feature-title">6 dimensions analysées</div><div class="feature-desc">Infrastructure, échelle, collaboration, gouvernance, financement, fonctions — les axes structurants de toute institution d'innovation.</div></div>
+            <div class="feature-card"><div class="feature-icon">🧬</div><div class="feature-title">Taxonomie complète</div><div class="feature-desc">Des fablabs aux systèmes nationaux d'innovation, des tech hubs aux districts industriels — l'ensemble du spectre des institutions est couvert.</div></div>
+            <div class="feature-card"><div class="feature-icon">📊</div><div class="feature-title">Scoring pondéré</div><div class="feature-desc">Vos réponses sont classées par priorité. L'algorithme calcule un taux de correspondance pour chaque profil et détecte les hybridations.</div></div>
+            <div class="feature-card"><div class="feature-icon">🎯</div><div class="feature-title">Recommandations ciblées</div><div class="feature-desc">Chaque diagnostic génère des recommandations adaptées à votre profil, vos forces et vos axes de développement spécifiques.</div></div>
+        </div>
+    </section>
+
+    <section class="how-section">
+        <div class="section-label">Comment ça marche</div>
+        <div class="section-title">Un diagnostic en 3 étapes</div>
+        <div class="how-grid">
+            <div class="how-step"><div class="how-num">01</div><div class="how-label">Décrivez</div><div class="how-desc">Répondez à 6 questions sur votre institution. Classez vos choix par priorité.</div></div>
+            <div class="how-step"><div class="how-num">02</div><div class="how-label">Analysez</div><div class="how-desc">L'algorithme compare votre profil à l'ensemble de la taxonomie et calcule les correspondances.</div></div>
+            <div class="how-step"><div class="how-num">03</div><div class="how-label">Agissez</div><div class="how-desc">Recevez votre profil, les alternatives proches, et des recommandations personnalisées.</div></div>
+        </div>
+    </section>
+
+    <section class="profiles-section">
+        <div class="section-label">Base de profils</div>
+        <div class="section-title">Une taxonomie exhaustive<br>des institutions d'innovation</div>
+        <div class="section-subtitle">Du makerspace de quartier au système national d'innovation — chaque structure trouve sa correspondance.</div>
+        <div class="marquee-track">
+            <div class="marquee-row r1" id="mq1"></div>
+        </div>
+        <div class="marquee-track" style="margin-top:12px">
+            <div class="marquee-row r2" id="mq2"></div>
+        </div>
+    </section>
+
+    <section class="footer-cta">
+        <h2 class="footer-cta-title">Prêt à <em>diagnostiquer</em> ?</h2>
+        <p>Gratuit, sans inscription, résultats immédiats.</p>
+        <button class="btn-hero btn-hero-primary" onclick="startDiagnostic()">Commencer maintenant →</button>
+    </section>
+    <footer class="site-footer">Conçu par <a href="#">Hermas</a> · Propulsé par <a href="#">IBUDO</a> · 2025</footer>
+</div>
+
+<div id="diagPage" class="diagnostic-wrapper">
+    <div class="diag-topbar"><button class="diag-back" onclick="backToLanding()">← Retour</button><span class="diag-progress-mini" id="diagMini">1 / 6</span></div>
+    <div class="diag-container">
+        <div class="diag-progress-bar" id="diagProgressBar"><div class="diag-progress-meta"><span class="diag-progress-label" id="diagLabel">Infrastructure</span><span class="diag-progress-step" id="diagStep">1 sur 6</span></div><div class="diag-progress-track"><div class="diag-progress-fill" id="diagFill" style="width:16.66%"></div></div></div>
+        <div class="diag-dots" id="diagDots"><div class="diag-dot active"></div><div class="diag-dot"></div><div class="diag-dot"></div><div class="diag-dot"></div><div class="diag-dot"></div><div class="diag-dot"></div></div>
+        <div class="diag-card" id="diagCard"><div class="q-section" id="qSection"></div></div>
+        <div class="diag-nav" id="diagNav"><button class="d-btn d-btn-secondary" id="dPrev" disabled>← Précédent</button><button class="d-btn d-btn-primary" id="dNext">Suivant →</button></div>
+        <div class="res-section" id="resSection"></div>
+    </div>
+</div>
+<div class="toast-msg" id="toastEl"></div>
+
+<script>
+(function(){
+const questions=[
+{id:1,name:"infrastructure",label:"Infrastructure",title:"Quelles infrastructures sont présentes ?",hint:"Sélectionnez tout ce qui s'applique, puis classez par importance.",
+options:[{value:"atelier",label:"Atelier / Makerspace",desc:"Machines, impression 3D, outillage"},{value:"bureaux",label:"Bureaux / Coworking",desc:"Pépinière, espaces partagés"},{value:"labos",label:"Laboratoires",desc:"Équipements scientifiques, R&D"},{value:"formation",label:"Salles de formation",desc:"Amphithéâtre, espaces pédagogiques"},{value:"tierslieu",label:"Tiers-lieu",desc:"Espace communautaire, café"},{value:"studio",label:"Studio",desc:"Audiovisuel, arts numériques"},{value:"territoire",label:"Infra territoriale",desc:"Capteurs, ville intelligente"},{value:"usine",label:"Usine / Zone industrielle",desc:"Production, assemblage, logistique"},{value:"rien",label:"Pas d'infra physique",desc:"Réseau uniquement"}]},
+{id:2,name:"echelle",label:"Échelle",title:"À quelle échelle rayonne l'institution ?",hint:"Classez par ordre de priorité de rayonnement.",
+options:[{value:"micro",label:"Micro-locale",desc:"Quartier, commune"},{value:"meso",label:"Mésoscopique",desc:"Métropole, département"},{value:"macro",label:"Macroscopique",desc:"Régionale ou nationale"},{value:"mega",label:"Mégascopique",desc:"Internationale, mondiale"}]},
+{id:3,name:"logique",label:"Collaboration",title:"Quelle logique de collaboration domine ?",hint:"Comment les acteurs interagissent-ils ?",
+options:[{value:"cluster",label:"Cluster",desc:"Même secteur, performance commune"},{value:"reseau",label:"Réseau",desc:"Acteurs divers, échanges de ressources"},{value:"ecosysteme",label:"Écosystème",desc:"Auto-organisé, adaptatif, émergent"},{value:"hierarchique",label:"Hiérarchique / Institutionnel",desc:"Coordination centralisée, top-down"}]},
+{id:4,name:"initiateur",label:"Gouvernance",title:"Qui sont les initiateurs principaux ?",hint:"Classez par ordre d'influence.",
+options:[{value:"public",label:"Public",desc:"État, collectivité, université"},{value:"prive",label:"Privé",desc:"Entreprise, investisseurs, fonds"},{value:"associatif",label:"Associatif / Communautaire",desc:"Collectif citoyen, ONG, association"},{value:"mixte",label:"Mixte",desc:"PPP, fondation, consortium"},{value:"international",label:"International",desc:"Organisme multilatéral, coopération"}]},
+{id:5,name:"financement",label:"Financement",title:"Comment l'institution est-elle financée ?",hint:"Classez les sources par importance.",
+options:[{value:"subventions",label:"Subventions publiques",desc:"Fonds publics, aides d'État"},{value:"investissements",label:"Investissements privés",desc:"Capital-risque, participation"},{value:"cotisations",label:"Cotisations",desc:"Adhésions des membres"},{value:"prestations",label:"Prestations",desc:"Formations, locations, conseil"},{value:"mecenat",label:"Mécénat / Dons / Coopération",desc:"Philanthropie, aide internationale"},{value:"production",label:"Revenus de production",desc:"Vente de produits, licences, brevets"},{value:"mixte",label:"Mixte",desc:"Sources multiples équilibrées"}]},
+{id:6,name:"fonction",label:"Fonctions",title:"Quelles sont les fonctions principales ?",hint:"Classez par importance.",
+options:[{value:"formation",label:"Formation",desc:"Ateliers, montée en compétences"},{value:"incubation",label:"Incubation",desc:"Accompagnement de jeunes pousses"},{value:"acceleration",label:"Accélération",desc:"Programme intensif de croissance"},{value:"experimentation",label:"Expérimentation",desc:"Prototypage, tests"},{value:"recherche",label:"R&D",desc:"Recherche & développement"},{value:"miseenreseau",label:"Mise en réseau",desc:"Animation, événements"},{value:"financement",label:"Financement direct",desc:"Investissement, amorçage"},{value:"hebergement",label:"Hébergement",desc:"Espaces mis à disposition"},{value:"production",label:"Production / Fabrication",desc:"Manufacture, assemblage"},{value:"politique",label:"Politique / Stratégie",desc:"Cadrage, coordination, régulation"},{value:"transfert",label:"Transfert technologique",desc:"Valorisation, brevets, licences"}]}
+];
+
+const P=[
+{n:"Fablab / Makerspace associatif",e:"🔧",d:"Atelier communautaire ouvert à tous, géré par une association. Culture maker, prototypage, partage de compétences. Ancrage local fort.",c:{infrastructure:{atelier:10,tierslieu:5,formation:3},echelle:{micro:10,meso:5},logique:{reseau:10,ecosysteme:2},initiateur:{associatif:10,mixte:3},financement:{cotisations:10,subventions:7,prestations:5,mecenat:3},fonction:{experimentation:10,formation:8,miseenreseau:5}},r:["Renforcez votre modèle économique par des prestations (formations, locations).","Mutualisez vos achats avec d'autres fablabs via des réseaux régionaux.","Valorisez votre impact social pour obtenir des subventions ESS."]},
+{n:"Pôle de compétitivité / Cluster labellisé",e:"🏛️",d:"Structure labellisée rassemblant grands groupes, PME et laboratoires autour d'une filière stratégique.",c:{infrastructure:{bureaux:8,labos:5,rien:3},echelle:{macro:10,mega:5,meso:3},logique:{cluster:10,reseau:5,ecosysteme:3},initiateur:{public:10,mixte:7,prive:2},financement:{subventions:10,cotisations:8,mixte:5},fonction:{miseenreseau:10,recherche:8,formation:3,acceleration:3}},r:["Développez des actions de veille et d'intelligence économique.","Facilitez l'émergence de projets collaboratifs multi-acteurs.","Travaillez votre visibilité internationale pour attirer des investisseurs."]},
+{n:"Incubateur universitaire / académique",e:"🎓",d:"Structure adossée à une université, accompagnant projets de recherche et entrepreneuriat étudiant.",c:{infrastructure:{bureaux:10,labos:7,formation:8},echelle:{meso:10,macro:7,micro:3},logique:{reseau:8,cluster:3,ecosysteme:2},initiateur:{public:10,mixte:5},financement:{subventions:10,mixte:7,mecenat:3},fonction:{incubation:10,formation:8,recherche:5,miseenreseau:3}},r:["Renforcez les liens avec le tissu économique local.","Proposez des formations à l'entrepreneuriat pour étudiants et doctorants.","Mettez en place un fonds d'amorçage académique."]},
+{n:"Accélérateur privé / Corporate",e:"🚀",d:"Programme intensif porté par le privé pour faire croître rapidement des start-up à fort potentiel.",c:{infrastructure:{bureaux:10,formation:7},echelle:{macro:10,mega:8,meso:3},logique:{reseau:8,cluster:3,ecosysteme:2},initiateur:{prive:10,mixte:5},financement:{investissements:10,prestations:3,mixte:5},fonction:{acceleration:10,financement:8,incubation:5,miseenreseau:5}},r:["Diversifiez votre réseau de mentors sectoriels.","Organisez des démos days réguliers.","Proposez des programmes thématiques (deep tech, greentech)."]},
+{n:"Living lab territorial",e:"🌿",d:"Dispositif d'expérimentation en conditions réelles avec citoyens, entreprises et chercheurs sur un territoire.",c:{infrastructure:{territoire:10,tierslieu:7,labos:5,bureaux:3},echelle:{meso:10,macro:5,micro:5},logique:{reseau:8,ecosysteme:5,cluster:2},initiateur:{public:10,mixte:7,associatif:3},financement:{subventions:10,mixte:5,prestations:3},fonction:{experimentation:10,miseenreseau:7,recherche:5,formation:3}},r:["Impliquez les citoyens dès la conception des expérimentations.","Documentez et partagez les retours d'expérience.","Créez des passerelles avec d'autres living labs."]},
+{n:"Espace de coworking / Tiers-lieu privé",e:"💼",d:"Lieu de travail partagé avec services, hébergement et mise en relation informelle des professionnels.",c:{infrastructure:{bureaux:10,tierslieu:8,formation:3},echelle:{meso:10,micro:8,macro:2},logique:{reseau:8,ecosysteme:2},initiateur:{prive:10,associatif:3},financement:{prestations:10,cotisations:5,investissements:3},fonction:{hebergement:10,miseenreseau:7,formation:5}},r:["Développez une programmation événementielle pour fidéliser.","Proposez des formules d'abonnement flexibles.","Créez des partenariats avec des entreprises locales."]},
+{n:"Campus d'innovation international",e:"🌐",d:"Grande structure intégrée : recherche, formation, incubation, accélération à rayonnement mondial. Type UM6P, Sophia Antipolis.",c:{infrastructure:{labos:10,bureaux:9,formation:9,atelier:7,tierslieu:6,studio:4},echelle:{mega:10,macro:9,meso:5},logique:{ecosysteme:10,reseau:8,cluster:5},initiateur:{mixte:10,prive:8,public:5},financement:{mixte:10,investissements:8,subventions:5,mecenat:5},fonction:{recherche:10,incubation:9,acceleration:8,formation:8,experimentation:7,miseenreseau:7}},r:["Capitalisez sur votre rayonnement pour attirer les meilleurs talents.","Développez des chaires de recherche avec des partenaires globaux.","Créez un fonds d'investissement dédié."]},
+{n:"Réseau informel / Communauté",e:"🤝",d:"Pas de lieu physique, fonctionnant par rencontres régulières, adhésion volontaire ou bénévolat.",c:{infrastructure:{rien:10},echelle:{meso:8,macro:5,micro:5},logique:{reseau:10,ecosysteme:3},initiateur:{associatif:10,mixte:3},financement:{cotisations:10,mecenat:3},fonction:{miseenreseau:10,formation:3}},r:["Formalisez certains processus (charte, groupes de travail).","Cherchez des financements pour un animateur permanent.","Créez des outils numériques collaboratifs."]},
+{n:"Technopole / Parc scientifique",e:"🏗️",d:"Grand espace aménagé accueillant entreprises innovantes, laboratoires et services mutualisés.",c:{infrastructure:{bureaux:10,labos:9,formation:7,tierslieu:5},echelle:{meso:10,macro:8,mega:3},logique:{reseau:8,cluster:7,ecosysteme:5},initiateur:{public:9,mixte:8,prive:3},financement:{mixte:10,subventions:8,prestations:7},fonction:{hebergement:10,miseenreseau:8,recherche:7,incubation:6}},r:["Ancrez votre projet dans une stratégie territoriale.","Proposez des services mutualisés aux résidents.","Développez une offre de vie autour du parc."]},
+{n:"Centre de formation / Académie d'innovation",e:"📚",d:"Structure dédiée à la montée en compétences et formation professionnelle dans l'innovation et le numérique.",c:{infrastructure:{formation:10,bureaux:6,studio:4},echelle:{meso:8,macro:7,micro:4},logique:{reseau:6,hierarchique:5},initiateur:{prive:7,public:6,mixte:5},financement:{prestations:10,subventions:7,cotisations:4},fonction:{formation:10,miseenreseau:4,experimentation:3}},r:["Certifiez vos formations (labels qualité, reconnaissance nationale).","Développez des programmes en ligne pour étendre votre portée.","Créez des parcours en partenariat avec des universités."]},
+{n:"Tech Hub / Hub technologique",e:"⚡",d:"Espace concentrant startups tech, développeurs et entrepreneurs numériques. Axé sur l'écosystème tech local.",c:{infrastructure:{bureaux:10,formation:7,tierslieu:6,studio:4},echelle:{meso:10,macro:7,mega:4},logique:{ecosysteme:7,reseau:8,cluster:4},initiateur:{prive:10,mixte:5,associatif:3},financement:{prestations:8,investissements:7,mixte:5,cotisations:4},fonction:{hebergement:8,incubation:7,miseenreseau:8,formation:6,acceleration:5}},r:["Positionnez-vous comme vitrine du talent tech local.","Développez des partenariats internationaux.","Organisez des hackathons réguliers pour animer la communauté."]},
+{n:"Cluster technologique",e:"🔗",d:"Concentration géographique d'entreprises tech, fournisseurs spécialisés et institutions associées dans un secteur de pointe.",c:{infrastructure:{bureaux:8,labos:7,usine:5},echelle:{meso:10,macro:8,mega:4},logique:{cluster:10,reseau:6,ecosysteme:4},initiateur:{prive:8,public:6,mixte:7},financement:{mixte:8,investissements:7,subventions:6,prestations:4},fonction:{recherche:8,production:7,miseenreseau:7,transfert:6,formation:4}},r:["Renforcez les liens dans la chaîne de valeur entre entreprises.","Développez une marque territoriale forte.","Investissez dans la formation spécialisée."]},
+{n:"District industriel",e:"🏭",d:"Système productif local de PME spécialisées coopérant dans un même secteur, avec fort enracinement socio-culturel.",c:{infrastructure:{usine:10,bureaux:5,formation:3},echelle:{meso:10,macro:5,micro:7},logique:{cluster:10,reseau:5,ecosysteme:3},initiateur:{prive:10,associatif:4,public:3},financement:{production:10,prestations:5,cotisations:4},fonction:{production:10,miseenreseau:6,formation:4,experimentation:3}},r:["Modernisez votre base productive avec des technologies numériques.","Créez un centre de design et d'innovation partagé.","Renforcez les liens avec les universités."]},
+{n:"Écosystème d'innovation territorial",e:"🌍",d:"Système auto-organisé rassemblant entreprises, universités et institutions sur un territoire. Dynamique émergente et vertueuse.",c:{infrastructure:{bureaux:8,labos:8,formation:7,tierslieu:7,atelier:5},echelle:{meso:10,macro:9,mega:6},logique:{ecosysteme:10,reseau:8,cluster:6},initiateur:{mixte:10,public:7,prive:7,associatif:4},financement:{mixte:10,investissements:7,subventions:7,prestations:5},fonction:{miseenreseau:10,incubation:8,recherche:8,formation:7,acceleration:6,experimentation:6}},r:["Documentez et rendez visible la dynamique émergente.","Créez des espaces de gouvernance partagée multi-acteurs.","Investissez dans des indicateurs d'impact systémique."]},
+{n:"Système national d'innovation",e:"🗺️",d:"Ensemble des institutions, politiques et flux de connaissance déterminant la capacité d'innovation d'un pays.",c:{infrastructure:{labos:7,bureaux:5,formation:7,territoire:5},echelle:{macro:10,mega:8,meso:5},logique:{hierarchique:8,ecosysteme:6,reseau:5},initiateur:{public:10,international:5,mixte:5},financement:{subventions:10,mixte:8,mecenat:4},fonction:{politique:10,recherche:8,formation:7,transfert:6,miseenreseau:5}},r:["Renforcez la coordination entre ministères et agences.","Créez des mécanismes de feedback entre politique et terrain.","Investissez dans les données d'innovation pour piloter le système."]},
+{n:"Centre de transfert technologique",e:"🔬",d:"Structure de valorisation de la recherche : brevets, licences, spin-offs. Pont entre laboratoire et marché.",c:{infrastructure:{labos:10,bureaux:7},echelle:{macro:8,meso:8,mega:4},logique:{reseau:7,cluster:5,hierarchique:4},initiateur:{public:8,mixte:7,prive:4},financement:{subventions:8,prestations:7,production:5,mixte:5},fonction:{transfert:10,recherche:8,incubation:5,formation:3}},r:["Accélérez le time-to-market des technologies transférées.","Développez un réseau de scouts technologiques.","Créez un fonds de maturation pour les preuves de concept."]},
+{n:"Venture Studio / Startup Studio",e:"🧪",d:"Structure créant et lançant ses propres startups en interne, avec équipes, processus et capital dédiés.",c:{infrastructure:{bureaux:10,studio:5},echelle:{macro:8,mega:7,meso:5},logique:{reseau:6,cluster:3,ecosysteme:3},initiateur:{prive:10,mixte:4},financement:{investissements:10,production:5,mixte:4},fonction:{incubation:8,acceleration:8,financement:10,experimentation:6}},r:["Systématisez votre processus de validation d'idées.","Constituez un pool de talents récurrents.","Développez des thèses d'investissement claires."]},
+{n:"Pépinière d'entreprises",e:"🌱",d:"Structure d'accueil pour jeunes entreprises : locaux, services mutualisés et accompagnement de proximité.",c:{infrastructure:{bureaux:10,formation:5,tierslieu:4},echelle:{micro:8,meso:10,macro:3},logique:{reseau:7,hierarchique:3},initiateur:{public:10,mixte:6},financement:{subventions:8,prestations:8,mixte:5},fonction:{hebergement:10,incubation:7,formation:5,miseenreseau:5}},r:["Développez un programme de mentorat.","Créez des synergies entre résidents.","Préparez la sortie de pépinière avec des passerelles."]},
+{n:"Agence d'innovation publique",e:"🏢",d:"Organisme public coordonnant, finançant et promouvant l'innovation au niveau national ou régional.",c:{infrastructure:{bureaux:7,rien:4},echelle:{macro:10,mega:5,meso:7},logique:{hierarchique:10,reseau:5,ecosysteme:3},initiateur:{public:10,international:3},financement:{subventions:10,mixte:5},fonction:{politique:10,financement:8,miseenreseau:6,formation:4,recherche:3}},r:["Simplifiez vos processus de financement.","Développez des indicateurs d'impact au-delà des brevets.","Créez des programmes pour les innovations sociales et frugales."]},
+{n:"Hub créatif / Industrie culturelle",e:"🎨",d:"Lieu dédié aux industries créatives : design, audiovisuel, gaming, arts numériques. Art × technologie × entrepreneuriat.",c:{infrastructure:{studio:10,tierslieu:8,bureaux:6,atelier:5},echelle:{meso:10,macro:5,micro:6},logique:{reseau:9,ecosysteme:5},initiateur:{associatif:7,prive:6,mixte:5,public:4},financement:{prestations:8,subventions:7,mecenat:6,cotisations:4},fonction:{experimentation:8,hebergement:7,miseenreseau:8,formation:6,production:4}},r:["Créez des résidences d'artistes-entrepreneurs.","Développez des ponts entre créatifs et entreprises tech.","Valorisez la propriété intellectuelle produite."]},
+{n:"Plateforme d'innovation ouverte",e:"🔓",d:"Dispositif facilitant la co-innovation entre grandes entreprises et acteurs externes : startups, chercheurs, communautés.",c:{infrastructure:{bureaux:5,rien:6},echelle:{macro:8,mega:7,meso:5},logique:{reseau:10,ecosysteme:6,cluster:3},initiateur:{prive:10,mixte:5},financement:{investissements:7,prestations:6,mixte:6},fonction:{experimentation:8,miseenreseau:9,incubation:5,transfert:5,recherche:4}},r:["Assurez un retour de valeur équitable vers les contributeurs.","Créez des challenges thématiques pour mobiliser l'écosystème.","Mesurez le taux de transformation des projets co-innovés."]},
+{n:"Zone économique spéciale / Zone franche",e:"📍",d:"Territoire à régimes fiscaux et réglementaires avantageux pour attirer investissements et entreprises innovantes.",c:{infrastructure:{usine:8,bureaux:9,labos:5,territoire:7},echelle:{macro:10,mega:7,meso:6},logique:{cluster:7,hierarchique:6,reseau:4},initiateur:{public:10,international:5,mixte:5},financement:{subventions:8,investissements:8,mixte:7},fonction:{hebergement:10,production:7,miseenreseau:5,recherche:4,politique:4}},r:["Développez les services au-delà des avantages fiscaux.","Créez des liens avec l'écosystème local hors zone.","Investissez dans la formation pour retenir les entreprises."]},
+{n:"Centre de recherche appliquée",e:"🧬",d:"Laboratoire orienté résolution de problèmes industriels concrets. Recherche à finalité économique, partenariats privés.",c:{infrastructure:{labos:10,bureaux:6,atelier:4},echelle:{macro:8,meso:8,mega:5},logique:{cluster:6,reseau:6,hierarchique:5},initiateur:{public:7,mixte:8,prive:6},financement:{subventions:7,prestations:7,production:5,mixte:6},fonction:{recherche:10,transfert:8,experimentation:7,formation:4}},r:["Renforcez les contrats de recherche partenariale.","Créez des chaires de recherche co-financées.","Développez un portefeuille de brevets et licences."]},
+{n:"Fondation / Think tank d'innovation",e:"💡",d:"Organisation produisant connaissance, plaidoyer et recommandations sur les politiques d'innovation. Influence et réflexion stratégique.",c:{infrastructure:{bureaux:6,rien:5},echelle:{macro:10,mega:7,meso:4},logique:{reseau:8,hierarchique:4,ecosysteme:3},initiateur:{mixte:7,associatif:6,international:5,public:4},financement:{mecenat:10,subventions:7,prestations:5},fonction:{politique:8,recherche:7,miseenreseau:8,formation:5}},r:["Publiez régulièrement pour asseoir votre expertise.","Diversifiez vos financements pour garantir l'indépendance.","Créez des ponts avec les praticiens pour ancrer vos recommandations."]}
+];
+
+// Marquee
+const mq1=document.getElementById('mq1'),mq2=document.getElementById('mq2');
+const half=Math.ceil(P.length/2);
+function chipHTML(p){return`<div class="profile-chip"><div class="profile-chip-top"><span class="profile-chip-emoji">${p.e}</span><span class="profile-chip-name">${p.n.split('/')[0].trim()}</span></div><div class="profile-chip-desc">${p.d.substring(0,55)}…</div></div>`;}
+const row1=P.slice(0,half),row2=P.slice(half);
+mq1.innerHTML=[...row1,...row1,...row1].map(chipHTML).join('');
+mq2.innerHTML=[...row2,...row2,...row2].map(chipHTML).join('');
+
+// State
+let answers={};questions.forEach(q=>{answers[q.name]=[];});let ci=0;
+const $=id=>document.getElementById(id);
+const landingPage=$('landingPage'),diagPage=$('diagPage'),qSection=$('qSection'),diagCard=$('diagCard');
+const dPrev=$('dPrev'),dNext=$('dNext'),diagNav=$('diagNav');
+const diagLabel=$('diagLabel'),diagStep=$('diagStep'),diagFill=$('diagFill'),diagMini=$('diagMini');
+const diagProgressBar=$('diagProgressBar'),diagDots=$('diagDots'),resSection=$('resSection'),toastEl=$('toastEl');
+
+window.startDiagnostic=function(){landingPage.style.display='none';diagPage.classList.add('active');window.scrollTo(0,0);renderQ(ci);};
+window.backToLanding=function(){diagPage.classList.remove('active');landingPage.style.display='';window.scrollTo(0,0);};
+
+const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*100);obs.unobserve(e.target);}});},{threshold:.15});
+document.querySelectorAll('.feature-card,.section-label,.section-title,.section-subtitle,.how-step').forEach(el=>obs.observe(el));
+
+function toast(m){toastEl.textContent=m;toastEl.classList.add('on');setTimeout(()=>toastEl.classList.remove('on'),2500);}
+
+function renderQ(idx,dir){
+    const q=questions[idx],saved=answers[q.name];
+    if(dir){qSection.classList.add(dir==='next'?'slide-out-l':'slide-out-r');setTimeout(()=>{buildQ(q,saved);qSection.className='q-section '+(dir==='next'?'slide-in-r':'slide-in-l');setTimeout(()=>qSection.className='q-section',300);},220);}else buildQ(q,saved);
+    diagLabel.textContent=q.label;diagStep.textContent=`${idx+1} sur 6`;diagMini.textContent=`${idx+1} / 6`;diagFill.style.width=`${((idx+1)/6)*100}%`;
+    diagDots.querySelectorAll('.diag-dot').forEach((d,i)=>{d.className='diag-dot';if(i<idx)d.classList.add('done');if(i===idx)d.classList.add('active');});
+    dPrev.disabled=idx===0;dNext.innerHTML=idx===5?'Voir le diagnostic ✦':'Suivant →';
+}
+function buildQ(q,saved){
+    let h=`<span class="q-tag">Question ${q.id}</span><h2 class="q-title">${q.title}</h2><p class="q-hint">${q.hint}</p><div class="q-options">`;
+    q.options.forEach(o=>{const it=saved.find(a=>a.value===o.value),on=!!it,rk=it?it.rank:0;
+    h+=`<div class="q-opt ${on?'on':''}" data-v="${o.value}"><div class="q-check"><svg viewBox="0 0 12 12" width="12" height="12" fill="none"><path d="M2 6L5 9L10 3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="q-text"><div class="q-text-main">${o.label}</div><div class="q-text-sub">${o.desc}</div></div><div class="q-rank"><div class="q-rank-btns"><button class="q-rank-btn ru" data-v="${o.value}" ${rk<=1?'disabled':''}>▲</button><button class="q-rank-btn rd" data-v="${o.value}" ${!on?'disabled':''}>▼</button></div><div class="q-rank-num" data-v="${o.value}">${rk>0?rk:''}</div></div></div>`;});
+    h+='</div>';qSection.innerHTML=h;bindOpts(q.name);
+}
+function bindOpts(qn){
+    document.querySelectorAll('.q-opt').forEach(el=>{el.addEventListener('click',function(ev){if(ev.target.closest('.q-rank-btn'))return;const v=this.dataset.v,i=answers[qn].findIndex(a=>a.value===v);if(i>-1){answers[qn].splice(i,1);rerank(qn);}else{const nr=answers[qn].length?Math.max(...answers[qn].map(a=>a.rank))+1:1;answers[qn].push({value:v,rank:nr});}refresh(qn);});});
+    document.querySelectorAll('.ru').forEach(b=>{b.addEventListener('click',function(ev){ev.stopPropagation();const v=this.dataset.v,it=answers[qn].find(a=>a.value===v);if(it&&it.rank>1){const ot=answers[qn].find(a=>a.rank===it.rank-1);if(ot)ot.rank++;it.rank--;answers[qn].sort((a,b)=>a.rank-b.rank);refresh(qn);}});});
+    document.querySelectorAll('.rd').forEach(b=>{b.addEventListener('click',function(ev){ev.stopPropagation();const v=this.dataset.v,it=answers[qn].find(a=>a.value===v);if(it&&it.rank<answers[qn].length){const ot=answers[qn].find(a=>a.rank===it.rank+1);if(ot)ot.rank--;it.rank++;answers[qn].sort((a,b)=>a.rank-b.rank);refresh(qn);}});});
+}
+function rerank(qn){answers[qn].sort((a,b)=>a.rank-b.rank).forEach((a,i)=>{a.rank=i+1;});}
+function refresh(qn){document.querySelectorAll('.q-opt').forEach(el=>{const v=el.dataset.v,it=answers[qn].find(a=>a.value===v),on=!!it;el.classList.toggle('on',on);const num=el.querySelector('.q-rank-num');if(num)num.textContent=on?it.rank:'';const ru=el.querySelector('.ru'),rd=el.querySelector('.rd');if(ru)ru.disabled=!on||it.rank===1;if(rd)rd.disabled=!on||it.rank===answers[qn].length;});}
+
+dPrev.addEventListener('click',()=>{if(ci>0){ci--;renderQ(ci,'prev');}});
+dNext.addEventListener('click',()=>{if(!answers[questions[ci].name].length){toast('Sélectionnez au moins une option');return;}if(ci<5){ci++;renderQ(ci,'next');}else showResult();});
+
+function score(p){let t=0,mx=0;for(let d in p.c){const pd=p.c[d],rd=answers[d]||[];if(!rd.length)continue;rd.forEach(r=>{t+=(pd[r.value]||0)*(1/r.rank);});const tv=Object.values(pd).sort((a,b)=>b-a).slice(0,rd.length);mx+=tv.reduce((s,v)=>s+v,0);}return mx>0?(t/mx)*100:0;}
+
+function showResult(){
+    diagCard.style.display='none';diagNav.style.display='none';diagProgressBar.style.display='none';diagDots.style.display='none';diagMini.textContent='Résultat';
+    const sc=P.map(p=>({p,s:score(p)})).sort((a,b)=>b.s-a.s);
+    const best=sc[0],sec=sc[1];const amb=sec&&(best.s-sec.s)<10;
+    let recos=[...best.p.r];
+    if(answers.fonction?.some(f=>f.value==='formation'&&f.rank<=2))recos.push("Pensez à certifier vos formations pour renforcer leur valeur.");
+    if(answers.financement?.some(f=>f.value==='subventions'&&f.rank===1))recos.push("Diversifiez vos ressources pour réduire la dépendance aux subventions.");
+    if(answers.echelle?.some(e=>e.value==='micro'&&e.rank===1)&&answers.infrastructure?.some(i=>i.value==='rien'))recos.push("Envisagez un lieu physique, même temporaire, pour fédérer votre communauté.");
+
+    let h=`<div class="res-hero"><div class="res-badge">✦ Diagnostic terminé</div><div class="res-name">${best.p.e} ${best.p.n}</div><div class="res-score">${best.s.toFixed(0)}%</div><div class="res-score-label">Correspondance</div><p class="res-desc">${best.p.d}</p></div>`;
+    if(best.s<30)h+=`<div class="alt-banner"><span style="font-size:20px">⚠️</span><p>Profil très spécifique ou hybride — le diagnostic est une approximation. Votre institution combine probablement plusieurs typologies.</p></div>`;
+    if(amb)h+=`<div class="alt-banner"><span style="font-size:20px">🔄</span><p>Profil proche : <strong>${sec.p.e} ${sec.p.n}</strong> — ${sec.s.toFixed(0)}%. Votre institution présente des caractéristiques hybrides.</p></div>`;
+    h+=`<div class="res-card"><div class="res-card-head"><div class="res-card-ico gold">📊</div><div class="res-card-title">Correspondances les plus proches</div></div>`;
+    const cols=['var(--accent)','var(--accent)','#D4C08A','#DDD5B8','#E5E0D4'];
+    sc.slice(0,5).forEach((s,i)=>{h+=`<div class="bar-wrap"><div class="bar-label"><span style="font-size:13px;color:var(--text-2)">${s.p.e} ${s.p.n}</span><span style="font-size:13px;font-weight:600;color:var(--text-1)">${s.s.toFixed(0)}%</span></div><div class="bar-track"><div class="bar-fill" style="width:${s.s}%;background:${cols[i]}"></div></div></div>`;});
+    h+='</div>';
+    h+=`<div class="res-card"><div class="res-card-head"><div class="res-card-ico green">🎯</div><div class="res-card-title">Recommandations</div></div><ul>${recos.map(r=>`<li><span style="color:var(--accent);flex-shrink:0">→</span> ${r}</li>`).join('')}</ul></div>`;
+    h+=`<div class="res-card"><div class="res-card-head"><div class="res-card-ico blue">🌍</div><div class="res-card-title">Comprendre les écosystèmes</div></div><p>Un <strong>écosystème d'innovation</strong> se distingue d'un réseau ou cluster par son auto-organisation, son adaptativité, ses boucles de rétroaction vertueuses et ses propriétés émergentes — culture commune, fluidité des carrières, attractivité auto-entretenue. La plupart des institutions sont des <em>composantes</em> d'un écosystème, pas l'écosystème lui-même.</p></div>`;
+    h+=`<div class="res-card"><div class="res-card-head"><div class="res-card-ico gray">📋</div><div class="res-card-title">Récapitulatif</div></div><ul>`;
+    questions.forEach(q=>{const reps=(answers[q.name]||[]).sort((a,b)=>a.rank-b.rank);h+=`<li style="flex-direction:column;gap:6px"><strong style="color:var(--text-1)">${q.label}</strong>`;if(reps.length){h+=`<div class="summary-tags">${reps.map((r,i)=>{const o=q.options.find(o=>o.value===r.value);return`<span class="s-tag ${i===0?'main':''}">${o?o.label:r.value}</span>`;}).join('')}</div>`;}else h+='<span style="font-size:13px;color:var(--text-3)">Non renseigné</span>';h+='</li>';});
+    h+='</ul></div>';
+    h+=`<button class="btn-reset-full" id="resetFull">↻ Nouveau diagnostic</button>`;
+    resSection.innerHTML=h;resSection.classList.add('show');
+    setTimeout(()=>{resSection.querySelectorAll('.bar-fill').forEach(b=>{const w=b.style.width;b.style.width='0%';setTimeout(()=>{b.style.width=w;},80);});},300);
+    $('resetFull').addEventListener('click',resetAll);window.scrollTo({top:0,behavior:'smooth'});
+}
+function resetAll(){questions.forEach(q=>{answers[q.name]=[];});ci=0;resSection.classList.remove('show');resSection.innerHTML='';diagCard.style.display='';diagNav.style.display='';diagProgressBar.style.display='';diagDots.style.display='';renderQ(0);window.scrollTo({top:0,behavior:'smooth'});}
+renderQ(0);
+})();
+</script>
+</body>
+</html>

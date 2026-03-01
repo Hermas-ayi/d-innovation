@@ -137,6 +137,29 @@
         .alt-banner{display:flex;align-items:center;gap:14px;padding:16px 20px;background:var(--warning-soft);border-radius:var(--radius-md);margin-top:14px;opacity:0;animation:dFadeUp .5s .1s var(--ease) forwards}.alt-banner p{font-size:14px;color:var(--text-2);line-height:1.5}.alt-banner strong{color:var(--text-1)}
         .summary-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}.s-tag{font-size:13px;padding:4px 10px;background:var(--surface-hover);border-radius:100px;color:var(--text-2)}.s-tag.main{background:var(--accent-soft);color:var(--accent-dark);font-weight:600}
         .btn-reset-full{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:16px;margin-top:20px;background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius-md);font-family:var(--font-body);font-size:15px;font-weight:600;color:var(--text-2);cursor:pointer;transition:all .25s var(--ease);opacity:0;animation:dFadeUp .5s .4s var(--ease) forwards}.btn-reset-full:hover{border-color:var(--text-3);color:var(--text-1);background:var(--surface-hover)}
+        /* Name modal */
+        .name-overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(15,15,15,.55);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:24px}
+        .name-overlay.open{display:flex}
+        .name-modal{background:var(--surface);border-radius:var(--radius-xl);padding:40px 36px;max-width:480px;width:100%;box-shadow:0 24px 64px rgba(0,0,0,.18);border:1px solid var(--border);opacity:0;transform:scale(.95) translateY(12px);transition:all .35s var(--ease)}
+        .name-overlay.open .name-modal{opacity:1;transform:scale(1) translateY(0)}
+        .name-modal-icon{width:52px;height:52px;border-radius:14px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:20px}
+        .name-modal h2{font-family:var(--font-display);font-size:24px;color:var(--text-1);margin-bottom:8px;letter-spacing:-.3px}
+        .name-modal p{font-size:14px;color:var(--text-2);margin-bottom:24px;line-height:1.5}
+        .name-input{width:100%;padding:16px 18px;border:1.5px solid var(--border);border-radius:var(--radius-md);font-family:var(--font-body);font-size:16px;color:var(--text-1);background:var(--bg);outline:none;transition:border-color .2s}
+        .name-input::placeholder{color:var(--text-3)}
+        .name-input:focus{border-color:var(--accent)}
+        .name-modal-actions{display:flex;gap:10px;margin-top:20px}
+        .name-modal-actions .d-btn{flex:1;justify-content:center}
+
+        /* Share button */
+        .btn-share{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:16px;margin-top:14px;background:linear-gradient(135deg,#1A1917,#2E2D2A);color:var(--cream);border:none;border-radius:var(--radius-md);font-family:var(--font-body);font-size:15px;font-weight:600;cursor:pointer;transition:all .25s var(--ease);opacity:0;animation:dFadeUp .5s .45s var(--ease) forwards}
+        .btn-share:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.15)}
+        .btn-share:active{transform:translateY(0)}
+        .btn-share svg{width:18px;height:18px}
+
+        /* Hidden canvas */
+        #shareCanvas{display:none}
+
         .toast-msg{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--text-1);color:white;padding:14px 24px;border-radius:var(--radius-md);font-size:14px;font-weight:500;box-shadow:0 12px 40px rgba(0,0,0,.15);z-index:1000;transition:transform .4s var(--bounce);pointer-events:none}.toast-msg.on{transform:translateX(-50%) translateY(0)}
 
         .slide-out-l{animation:soL .25s var(--ease) forwards}.slide-in-r{animation:siR .25s var(--ease) forwards}.slide-out-r{animation:soR .25s var(--ease) forwards}.slide-in-l{animation:siL .25s var(--ease) forwards}
@@ -215,6 +238,22 @@
 </div>
 <div class="toast-msg" id="toastEl"></div>
 
+<!-- Name modal -->
+<div class="name-overlay" id="nameOverlay">
+    <div class="name-modal">
+        <div class="name-modal-icon">🏷️</div>
+        <h2>Nommez votre institution</h2>
+        <p>Ce nom apparaîtra sur l'image de partage de votre diagnostic. Vous pouvez aussi passer cette étape.</p>
+        <input type="text" class="name-input" id="nameInput" placeholder="Ex : IBUDO, Station F, UM6P…" maxlength="60" autocomplete="off">
+        <div class="name-modal-actions">
+            <button class="d-btn d-btn-secondary" id="nameSkip">Passer</button>
+            <button class="d-btn d-btn-primary" id="nameConfirm">Voir le diagnostic →</button>
+        </div>
+    </div>
+</div>
+
+<canvas id="shareCanvas"></canvas>
+
 <script>
 (function(){
 const questions=[
@@ -268,12 +307,13 @@ mq1.innerHTML=[...row1,...row1,...row1].map(chipHTML).join('');
 mq2.innerHTML=[...row2,...row2,...row2].map(chipHTML).join('');
 
 // State
-let answers={};questions.forEach(q=>{answers[q.name]=[];});let ci=0;
+let answers={};questions.forEach(q=>{answers[q.name]=[];});let ci=0;let institutionName='';
 const $=id=>document.getElementById(id);
 const landingPage=$('landingPage'),diagPage=$('diagPage'),qSection=$('qSection'),diagCard=$('diagCard');
 const dPrev=$('dPrev'),dNext=$('dNext'),diagNav=$('diagNav');
 const diagLabel=$('diagLabel'),diagStep=$('diagStep'),diagFill=$('diagFill'),diagMini=$('diagMini');
 const diagProgressBar=$('diagProgressBar'),diagDots=$('diagDots'),resSection=$('resSection'),toastEl=$('toastEl');
+const nameOverlay=$('nameOverlay'),nameInput=$('nameInput'),nameSkip=$('nameSkip'),nameConfirm=$('nameConfirm');
 
 window.startDiagnostic=function(){landingPage.style.display='none';diagPage.classList.add('active');window.scrollTo(0,0);renderQ(ci);};
 window.backToLanding=function(){diagPage.classList.remove('active');landingPage.style.display='';window.scrollTo(0,0);};
@@ -305,7 +345,11 @@ function rerank(qn){answers[qn].sort((a,b)=>a.rank-b.rank).forEach((a,i)=>{a.ran
 function refresh(qn){document.querySelectorAll('.q-opt').forEach(el=>{const v=el.dataset.v,it=answers[qn].find(a=>a.value===v),on=!!it;el.classList.toggle('on',on);const num=el.querySelector('.q-rank-num');if(num)num.textContent=on?it.rank:'';const ru=el.querySelector('.ru'),rd=el.querySelector('.rd');if(ru)ru.disabled=!on||it.rank===1;if(rd)rd.disabled=!on||it.rank===answers[qn].length;});}
 
 dPrev.addEventListener('click',()=>{if(ci>0){ci--;renderQ(ci,'prev');}});
-dNext.addEventListener('click',()=>{if(!answers[questions[ci].name].length){toast('Sélectionnez au moins une option');return;}if(ci<5){ci++;renderQ(ci,'next');}else showResult();});
+dNext.addEventListener('click',()=>{if(!answers[questions[ci].name].length){toast('Sélectionnez au moins une option');return;}if(ci<5){ci++;renderQ(ci,'next');}else{nameOverlay.classList.add('open');nameInput.value=institutionName;setTimeout(()=>nameInput.focus(),350);}});
+
+nameInput.addEventListener('keydown',e=>{if(e.key==='Enter'){institutionName=nameInput.value.trim();nameOverlay.classList.remove('open');showResult();}});
+nameSkip.addEventListener('click',()=>{institutionName='';nameOverlay.classList.remove('open');showResult();});
+nameConfirm.addEventListener('click',()=>{institutionName=nameInput.value.trim();nameOverlay.classList.remove('open');showResult();});
 
 function score(p){let t=0,mx=0;for(let d in p.c){const pd=p.c[d],rd=answers[d]||[];if(!rd.length)continue;rd.forEach(r=>{t+=(pd[r.value]||0)*(1/r.rank);});const tv=Object.values(pd).sort((a,b)=>b-a).slice(0,rd.length);mx+=tv.reduce((s,v)=>s+v,0);}return mx>0?(t/mx)*100:0;}
 
@@ -318,7 +362,9 @@ function showResult(){
     if(answers.financement?.some(f=>f.value==='subventions'&&f.rank===1))recos.push("Diversifiez vos ressources pour réduire la dépendance aux subventions.");
     if(answers.echelle?.some(e=>e.value==='micro'&&e.rank===1)&&answers.infrastructure?.some(i=>i.value==='rien'))recos.push("Envisagez un lieu physique, même temporaire, pour fédérer votre communauté.");
 
-    let h=`<div class="res-hero"><div class="res-badge">✦ Diagnostic terminé</div><div class="res-name">${best.p.e} ${best.p.n}</div><div class="res-score">${best.s.toFixed(0)}%</div><div class="res-score-label">Correspondance</div><p class="res-desc">${best.p.d}</p></div>`;
+    let h=`<div class="res-hero"><div class="res-badge">✦ Diagnostic terminé</div>`;
+    if(institutionName) h+=`<p style="font-size:15px;color:var(--text-3);margin-bottom:8px;font-weight:500;letter-spacing:.5px;text-transform:uppercase">${institutionName}</p>`;
+    h+=`<div class="res-name">${best.p.e} ${best.p.n}</div><div class="res-score">${best.s.toFixed(0)}%</div><div class="res-score-label">Correspondance</div><p class="res-desc">${best.p.d}</p></div>`;
     if(best.s<30)h+=`<div class="alt-banner"><span style="font-size:20px">⚠️</span><p>Profil très spécifique ou hybride — le diagnostic est une approximation. Votre institution combine probablement plusieurs typologies.</p></div>`;
     if(amb)h+=`<div class="alt-banner"><span style="font-size:20px">🔄</span><p>Profil proche : <strong>${sec.p.e} ${sec.p.n}</strong> — ${sec.s.toFixed(0)}%. Votre institution présente des caractéristiques hybrides.</p></div>`;
     h+=`<div class="res-card"><div class="res-card-head"><div class="res-card-ico gold">📊</div><div class="res-card-title">Correspondances les plus proches</div></div>`;
@@ -330,12 +376,145 @@ function showResult(){
     h+=`<div class="res-card"><div class="res-card-head"><div class="res-card-ico gray">📋</div><div class="res-card-title">Récapitulatif</div></div><ul>`;
     questions.forEach(q=>{const reps=(answers[q.name]||[]).sort((a,b)=>a.rank-b.rank);h+=`<li style="flex-direction:column;gap:6px"><strong style="color:var(--text-1)">${q.label}</strong>`;if(reps.length){h+=`<div class="summary-tags">${reps.map((r,i)=>{const o=q.options.find(o=>o.value===r.value);return`<span class="s-tag ${i===0?'main':''}">${o?o.label:r.value}</span>`;}).join('')}</div>`;}else h+='<span style="font-size:13px;color:var(--text-3)">Non renseigné</span>';h+='</li>';});
     h+='</ul></div>';
+    h+=`<button class="btn-share" id="shareBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg> Exporter l'image de partage</button>`;
     h+=`<button class="btn-reset-full" id="resetFull">↻ Nouveau diagnostic</button>`;
     resSection.innerHTML=h;resSection.classList.add('show');
     setTimeout(()=>{resSection.querySelectorAll('.bar-fill').forEach(b=>{const w=b.style.width;b.style.width='0%';setTimeout(()=>{b.style.width=w;},80);});},300);
-    $('resetFull').addEventListener('click',resetAll);window.scrollTo({top:0,behavior:'smooth'});
+    $('resetFull').addEventListener('click',resetAll);
+    $('shareBtn').addEventListener('click',()=>generateShareImage(best,sc.slice(0,4)));
+    window.scrollTo({top:0,behavior:'smooth'});
 }
-function resetAll(){questions.forEach(q=>{answers[q.name]=[];});ci=0;resSection.classList.remove('show');resSection.innerHTML='';diagCard.style.display='';diagNav.style.display='';diagProgressBar.style.display='';diagDots.style.display='';renderQ(0);window.scrollTo({top:0,behavior:'smooth'});}
+
+// ==================== CANVAS IMAGE GENERATION ====================
+function generateShareImage(best,topScores){
+    const canvas=$('shareCanvas');
+    const dpr=2;
+    const W=1080,H=1350;
+    canvas.width=W*dpr;canvas.height=H*dpr;
+    canvas.style.width=W+'px';canvas.style.height=H+'px';
+    const ctx=canvas.getContext('2d');
+    ctx.scale(dpr,dpr);
+
+    // Background
+    const bgGrad=ctx.createLinearGradient(0,0,0,H);
+    bgGrad.addColorStop(0,'#0F0F0F');bgGrad.addColorStop(0.6,'#141412');bgGrad.addColorStop(1,'#1A1917');
+    ctx.fillStyle=bgGrad;ctx.fillRect(0,0,W,H);
+
+    // Subtle gold glow
+    const glow=ctx.createRadialGradient(200,250,0,200,250,500);
+    glow.addColorStop(0,'rgba(200,165,92,0.06)');glow.addColorStop(1,'transparent');
+    ctx.fillStyle=glow;ctx.fillRect(0,0,W,H);
+
+    const gold='#C8A55C',cream='#F7F5F0',muted='#7A7770',border='#2E2D2A';
+    const px=72,contentW=W-px*2;
+
+    // Top badge
+    ctx.fillStyle=gold;ctx.globalAlpha=0.15;
+    roundRect(ctx,px,72,220,36,18);ctx.fill();
+    ctx.globalAlpha=1;ctx.fillStyle=gold;ctx.font='600 13px Satoshi,sans-serif';ctx.textBaseline='middle';
+    ctx.fillText('✦  DIAGNOSTIC D\'INNOVATION',px+16,72+18);
+
+    // Institution name
+    let yPos=148;
+    if(institutionName){
+        ctx.fillStyle=cream;ctx.font='400 52px "Instrument Serif",Georgia,serif';ctx.textBaseline='top';
+        ctx.fillText(institutionName,px,yPos);
+        yPos+=72;
+    }
+
+    // "est un(e)" connector
+    ctx.fillStyle=muted;ctx.font='300 20px Satoshi,sans-serif';ctx.textBaseline='top';
+    ctx.fillText(institutionName?'correspond au profil':'Votre profil',px,yPos);
+    yPos+=40;
+
+    // Profile name
+    ctx.fillStyle=cream;ctx.font='400 42px "Instrument Serif",Georgia,serif';
+    const profileText=best.p.e+'  '+best.p.n;
+    wrapText(ctx,profileText,px,yPos,contentW,50);
+    yPos+=ctx._lastWrapHeight+24;
+
+    // Big score
+    ctx.fillStyle=gold;ctx.font='400 120px "Instrument Serif",Georgia,serif';
+    ctx.fillText(best.s.toFixed(0)+'%',px,yPos);
+    yPos+=130;
+    ctx.fillStyle=muted;ctx.font='600 14px Satoshi,sans-serif';ctx.letterSpacing='3px';
+    ctx.fillText('CORRESPONDANCE',px,yPos);
+    yPos+=56;
+
+    // Separator
+    ctx.fillStyle=border;ctx.fillRect(px,yPos,contentW,1);
+    yPos+=40;
+
+    // Description
+    ctx.fillStyle=muted;ctx.font='300 18px Satoshi,sans-serif';
+    wrapText(ctx,best.p.d,px,yPos,contentW,26);
+    yPos+=ctx._lastWrapHeight+44;
+
+    // Separator
+    ctx.fillStyle=border;ctx.fillRect(px,yPos,contentW,1);
+    yPos+=40;
+
+    // Top matches heading
+    ctx.fillStyle=cream;ctx.font='400 26px "Instrument Serif",Georgia,serif';
+    ctx.fillText('Correspondances',px,yPos);
+    yPos+=42;
+
+    // Score bars
+    topScores.forEach((s,i)=>{
+        const barH=8,barW=contentW-200,labelY=yPos;
+        const pct=s.s/100;
+        const alphas=[1,0.7,0.45,0.3];
+        // Name
+        ctx.fillStyle=i===0?cream:muted;ctx.font=(i===0?'500':'400')+' 16px Satoshi,sans-serif';
+        ctx.fillText(s.p.e+' '+s.p.n.split('/')[0].trim(),px,labelY);
+        // Percentage
+        ctx.fillStyle=i===0?gold:muted;ctx.font='600 16px Satoshi,sans-serif';ctx.textAlign='right';
+        ctx.fillText(s.s.toFixed(0)+'%',W-px,labelY);ctx.textAlign='left';
+        // Bar track
+        yPos+=14;
+        ctx.fillStyle='#252420';roundRect(ctx,px,yPos,contentW,barH,4);ctx.fill();
+        // Bar fill
+        ctx.fillStyle=gold;ctx.globalAlpha=alphas[i];
+        if(pct>0){roundRect(ctx,px,yPos,Math.max(contentW*pct,barH),barH,4);ctx.fill();}
+        ctx.globalAlpha=1;
+        yPos+=barH+24;
+    });
+
+    // Bottom copyright area
+    const footerY=H-60;
+    ctx.fillStyle=border;ctx.fillRect(px,footerY-20,contentW,1);
+    ctx.fillStyle=muted;ctx.globalAlpha=0.5;ctx.font='400 13px Satoshi,sans-serif';
+    ctx.fillText('diagnostic.innovation · IBUDO · '+new Date().getFullYear(),px,footerY+6);
+    ctx.textAlign='right';
+    ctx.fillText('hermas-ayi.github.io/diagnostic-innovation',W-px,footerY+6);
+    ctx.textAlign='left';ctx.globalAlpha=1;
+
+    // Download
+    canvas.toBlob(blob=>{
+        const url=URL.createObjectURL(blob);
+        const a=document.createElement('a');
+        a.href=url;
+        a.download='diagnostic-'+(institutionName||'institution').toLowerCase().replace(/[^a-z0-9]/gi,'-')+'.png';
+        document.body.appendChild(a);a.click();document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        toast('Image téléchargée !');
+    },'image/png');
+}
+
+// Canvas helpers
+function roundRect(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);ctx.lineTo(x+r,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h-r);ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.closePath();}
+
+function wrapText(ctx,text,x,y,maxW,lineH){
+    const words=text.split(' ');let line='';let lines=0;
+    for(let i=0;i<words.length;i++){
+        const test=line+words[i]+' ';
+        if(ctx.measureText(test).width>maxW&&i>0){ctx.fillText(line.trim(),x,y);y+=lineH;line=words[i]+' ';lines++;}
+        else line=test;
+    }
+    ctx.fillText(line.trim(),x,y);lines++;
+    ctx._lastWrapHeight=lines*lineH;
+}
+function resetAll(){questions.forEach(q=>{answers[q.name]=[];});ci=0;institutionName='';resSection.classList.remove('show');resSection.innerHTML='';diagCard.style.display='';diagNav.style.display='';diagProgressBar.style.display='';diagDots.style.display='';renderQ(0);window.scrollTo({top:0,behavior:'smooth'});}
 renderQ(0);
 })();
 </script>

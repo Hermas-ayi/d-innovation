@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diagnostic des institutions d'innovation — Par Hermas / IBUDO</title>
-    <meta name="description" content="Identifiez le profil exact de votre institution d'innovation en 7 questions. Diagnostic gratuit avec recommandations stratégiques personnalisées.">
-    <meta property="og:title" content="Diagnostic des institutions d'innovation">
-    <meta property="og:description" content="Quel est le profil exact de votre institution d'innovation ? Diagnostic gratuit, résultats immédiats, recommandations personnalisées.">
+    <title>Diagnostic OAE — Par Hermas / IBUDO</title>
+    <meta name="description" content="Identifiez le profil exact de votre institution d'innovation en 7 questions. Diagnostic OAE gratuit avec recommandations stratégiques personnalisées.">
+    <meta property="og:title" content="Diagnostic OAE">
+    <meta property="og:description" content="Quel est le profil exact de votre institution d'innovation ? Diagnostic OAE gratuit, résultats immédiats, recommandations personnalisées.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Satoshi:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -158,12 +158,12 @@
 
 <div id="landingPage" class="landing">
     <nav class="topbar">
-        <a href="#" class="topbar-logo">diagnostic<span>.innovation</span></a>
+        <a href="#" class="topbar-logo">diagnostic<span>.oae</span></a>
         <button class="topbar-cta" onclick="startDiagnostic()">Commencer →</button>
     </nav>
     <div class="landing-inner">
         <div class="hero-badge">Outil ouvert &amp; gratuit</div>
-        <h1 class="hero-title">Identifiez le profil<br>exact de votre<br>institution d'<em>innovation</em></h1>
+        <h1 class="hero-title">Diagnostic<br><em>OAE</em></h1>
         <p class="hero-sub">7 questions. Un algorithme de correspondance multi-dimensionnel. Des recommandations stratégiques taillées sur mesure — quelle que soit votre structure.</p>
         <div class="hero-actions">
             <button class="btn-hero btn-hero-primary" onclick="startDiagnostic()">Lancer le diagnostic →</button>
@@ -207,7 +207,7 @@
         <p>Gratuit, sans inscription, résultats immédiats.</p>
         <button class="btn-hero btn-hero-primary" onclick="startDiagnostic()">Commencer maintenant →</button>
     </section>
-    <footer class="site-footer">Conçu par <a href="#">Hermas</a> · Propulsé par <a href="#">IBUDO</a> · 2025</footer>
+    <footer class="site-footer">Conçu par <a href="#">Hermas</a> · Propulsé par <a href="#">IBUDO</a> · Diagnostic OAE · 2025</footer>
 </div>
 
 <div id="diagPage" class="diagnostic-wrapper">
@@ -351,130 +351,199 @@ function showResult(){
 
 function generateShareCard(best, top3){
     const name = ($('institutionName')?.value||'').trim();
-    const W=1080,H=1080;
+    const recos = [...best.p.r].slice(0,3);
+
+    const W=1080, H=1350;
     const canvas=document.createElement('canvas');
-    canvas.width=W;canvas.height=H;
+    canvas.width=W; canvas.height=H;
     const c=canvas.getContext('2d');
 
-    // Fond sombre
-    c.fillStyle='#0F0F0F';c.fillRect(0,0,W,H);
+    // ── Helpers ──────────────────────────────────────────────
+    function rr(x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.lineTo(x+w-r,y);c.quadraticCurveTo(x+w,y,x+w,y+r);c.lineTo(x+w,y+h-r);c.quadraticCurveTo(x+w,y+h,x+w-r,y+h);c.lineTo(x+r,y+h);c.quadraticCurveTo(x,y+h,x,y+h-r);c.lineTo(x,y+r);c.quadraticCurveTo(x,y,x+r,y);c.closePath();}
+    function wrapText(text,x,y,maxW,font,color,lineH){
+        c.font=font; c.fillStyle=color;
+        const words=text.split(' '); let line='';
+        for(let i=0;i<words.length;i++){
+            const t=line+(line?' ':'')+words[i];
+            if(c.measureText(t).width>maxW&&line){c.fillText(line,x,y);line=words[i];y+=lineH;}
+            else line=t;
+        }
+        c.fillText(line,x,y); return y;
+    }
+    const GOLD='#C8A55C', GOLD2='rgba(200,165,92,0.18)', CREAM='#F5F1E8', MUTED='rgba(245,241,232,0.45)', DIM='rgba(245,241,232,0.22)';
+    const PAD=80;
 
-    // Grain subtil
-    for(let i=0;i<18000;i++){
-        const x=Math.random()*W,y=Math.random()*H;
-        c.fillStyle=`rgba(255,255,255,${Math.random()*0.025})`;
-        c.fillRect(x,y,1,1);
+    // ── Fond ─────────────────────────────────────────────────
+    c.fillStyle='#0B0B0B'; c.fillRect(0,0,W,H);
+
+    // Grain
+    for(let i=0;i<24000;i++){
+        c.fillStyle=`rgba(255,255,255,${Math.random()*0.018})`;
+        c.fillRect(Math.random()*W,Math.random()*H,1,1);
     }
 
-    // Lueur dorée en haut à gauche
-    const grd=c.createRadialGradient(200,200,0,200,200,500);
-    grd.addColorStop(0,'rgba(200,165,92,0.10)');
-    grd.addColorStop(1,'rgba(200,165,92,0)');
-    c.fillStyle=grd;c.fillRect(0,0,W,H);
+    // Lueur dorée coin haut-droit
+    const gl=c.createRadialGradient(W,0,0,W,0,700);
+    gl.addColorStop(0,'rgba(200,165,92,0.09)'); gl.addColorStop(1,'rgba(200,165,92,0)');
+    c.fillStyle=gl; c.fillRect(0,0,W,H);
 
-    // Ligne dorée top
-    c.strokeStyle='#C8A55C';c.lineWidth=2;
-    c.beginPath();c.moveTo(80,80);c.lineTo(W-80,80);c.stroke();
+    // Lueur froide coin bas-gauche
+    const gl2=c.createRadialGradient(0,H,0,0,H,500);
+    gl2.addColorStop(0,'rgba(80,100,160,0.06)'); gl2.addColorStop(1,'rgba(80,100,160,0)');
+    c.fillStyle=gl2; c.fillRect(0,0,W,H);
 
-    // Badge "Diagnostic · Innovation"
-    c.font='600 22px Satoshi, sans-serif';
-    c.fillStyle='#C8A55C';
-    c.letterSpacing='3px';
-    c.fillText('DIAGNOSTIC · INNOVATION', 80, 130);
+    // Arc décoratif discret
+    c.save(); c.strokeStyle='rgba(200,165,92,0.07)'; c.lineWidth=120;
+    c.beginPath(); c.arc(W+200,−200,700,0,Math.PI*2); c.stroke(); c.restore();
+
+    // ── Bordure extérieure fine ───────────────────────────────
+    c.strokeStyle='rgba(200,165,92,0.2)'; c.lineWidth=1.5;
+    rr(20,20,W-40,H-40,16); c.stroke();
+
+    // ── Header ───────────────────────────────────────────────
+    // Tag outil
+    c.fillStyle=GOLD2; rr(PAD,PAD,260,36,6); c.fill();
+    c.font='600 15px -apple-system,"Segoe UI",sans-serif';
+    c.fillStyle=GOLD; c.letterSpacing='2.5px';
+    c.fillText('DIAGNOSTIC OAE', PAD+16, PAD+23);
     c.letterSpacing='0px';
 
-    // Emoji profil
-    c.font='72px serif';
-    c.fillText(best.p.e, 80, 260);
+    // Date
+    const now=new Date();
+    const dateStr=now.toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+    c.font='400 15px -apple-system,"Segoe UI",sans-serif';
+    c.fillStyle=DIM;
+    c.fillText(dateStr, W-PAD-c.measureText(dateStr).width, PAD+23);
 
-    // Nom institution (si renseigné)
+    // ── Nom structure ─────────────────────────────────────────
+    let curY = PAD+80;
     if(name){
-        c.font='500 32px Satoshi, sans-serif';
-        c.fillStyle='rgba(250,250,248,0.55)';
-        c.fillText(name.toUpperCase(), 80, 320);
-    }
+        c.font='500 26px -apple-system,"Segoe UI",sans-serif';
+        c.fillStyle=MUTED;
+        c.fillText(name, PAD, curY);
+        curY+=42;
+    } else curY+=16;
 
-    // Nom du profil
-    c.font='italic 700 76px Georgia, serif';
-    c.fillStyle='#FAFAF8';
-    const pname = best.p.n;
-    // Wrap si trop long
-    const words=pname.split(' ');let line='';let y=name?430:390;
-    const maxW=W-160;
-    words.forEach((w,i)=>{
-        const test=line+(line?' ':'')+w;
-        c.font='italic 700 72px Georgia, serif';
-        if(c.measureText(test).width>maxW&&line){
-            c.fillText(line,80,y);line=w;y+=90;
-        } else line=test;
-        if(i===words.length-1)c.fillText(line,80,y);
-    });
+    // ── Profil — nom en grand serif ───────────────────────────
+    c.fillStyle=CREAM;
+    curY = wrapText(best.p.n, PAD, curY+56, W-PAD*2, 'italic 700 74px Georgia,serif', CREAM, 86)+16;
 
-    // Score
-    const scoreY = y+100;
-    c.font='700 120px Georgia, serif';
-    const grad2=c.createLinearGradient(80,scoreY-100,200,scoreY);
-    grad2.addColorStop(0,'#C8A55C');grad2.addColorStop(1,'#A88940');
-    c.fillStyle=grad2;
-    c.fillText(`${best.s.toFixed(0)}%`, 80, scoreY);
-    c.font='500 24px Satoshi, sans-serif';
-    c.fillStyle='rgba(250,250,248,0.45)';
-    c.fillText('de correspondance', 80, scoreY+38);
+    // Trait décoratif sous le titre
+    const gradLine=c.createLinearGradient(PAD,0,PAD+300,0);
+    gradLine.addColorStop(0,GOLD); gradLine.addColorStop(1,'rgba(200,165,92,0)');
+    c.strokeStyle=gradLine; c.lineWidth=2;
+    c.beginPath(); c.moveTo(PAD,curY); c.lineTo(PAD+320,curY); c.stroke();
+    curY+=32;
 
-    // Séparateur
-    const sepY=scoreY+80;
-    c.strokeStyle='rgba(200,165,92,0.3)';c.lineWidth=1;
-    c.beginPath();c.moveTo(80,sepY);c.lineTo(W-80,sepY);c.stroke();
+    // ── Score pill ────────────────────────────────────────────
+    const pillW=260, pillH=64;
+    const pillG=c.createLinearGradient(PAD,0,PAD+pillW,0);
+    pillG.addColorStop(0,'rgba(200,165,92,0.22)'); pillG.addColorStop(1,'rgba(200,165,92,0.06)');
+    c.fillStyle=pillG; rr(PAD,curY,pillW,pillH,pillH/2); c.fill();
+    c.strokeStyle='rgba(200,165,92,0.3)'; c.lineWidth=1;
+    rr(PAD,curY,pillW,pillH,pillH/2); c.stroke();
 
-    // Top 3 correspondances
-    c.font='600 18px Satoshi, sans-serif';
-    c.fillStyle='rgba(200,165,92,0.8)';
-    c.letterSpacing='1.5px';
-    c.fillText('CORRESPONDANCES', 80, sepY+42);
+    c.font='700 32px Georgia,serif';
+    c.fillStyle=GOLD;
+    c.fillText(`${best.s.toFixed(0)}%`, PAD+24, curY+41);
+    c.font='400 17px -apple-system,"Segoe UI",sans-serif';
+    c.fillStyle=MUTED;
+    c.fillText('de correspondance', PAD+90, curY+41);
+    curY+=pillH+48;
+
+    // ── Séparateur ────────────────────────────────────────────
+    c.strokeStyle='rgba(245,241,232,0.08)'; c.lineWidth=1;
+    c.beginPath(); c.moveTo(PAD,curY); c.lineTo(W-PAD,curY); c.stroke();
+    curY+=40;
+
+    // ── Recommandations ───────────────────────────────────────
+    c.font='600 13px -apple-system,"Segoe UI",sans-serif';
+    c.fillStyle=GOLD; c.letterSpacing='2px';
+    c.fillText('RECOMMANDATIONS', PAD, curY);
     c.letterSpacing='0px';
+    curY+=28;
+
+    recos.forEach((r,i)=>{
+        // Fond carte
+        c.fillStyle=i===0?'rgba(200,165,92,0.07)':'rgba(255,255,255,0.03)';
+        const rh=80;
+        rr(PAD, curY, W-PAD*2, rh, 10); c.fill();
+        if(i===0){c.strokeStyle='rgba(200,165,92,0.18)';c.lineWidth=1;rr(PAD,curY,W-PAD*2,rh,10);c.stroke();}
+
+        // Numéro
+        c.font='700 15px Georgia,serif'; c.fillStyle=GOLD;
+        c.fillText(`0${i+1}`, PAD+18, curY+rh/2+6);
+
+        // Texte — wrap dans la carte
+        const tx=PAD+54, tmaxW=W-PAD*2-70;
+        c.font='400 17px -apple-system,"Segoe UI",sans-serif';
+        c.fillStyle=i===0?CREAM:MUTED;
+        // Truncate si trop long
+        let rtext=r;
+        while(c.measureText(rtext).width>tmaxW&&rtext.length>20)rtext=rtext.slice(0,-1);
+        if(rtext.length<r.length)rtext=rtext.slice(0,-1)+'…';
+        c.fillText(rtext, tx, curY+rh/2+6);
+
+        curY+=rh+8;
+    });
+    curY+=32;
+
+    // ── Séparateur ────────────────────────────────────────────
+    c.strokeStyle='rgba(245,241,232,0.08)'; c.lineWidth=1;
+    c.beginPath(); c.moveTo(PAD,curY); c.lineTo(W-PAD,curY); c.stroke();
+    curY+=40;
+
+    // ── Correspondances ───────────────────────────────────────
+    c.font='600 13px -apple-system,"Segoe UI",sans-serif';
+    c.fillStyle=GOLD; c.letterSpacing='2px';
+    c.fillText('CORRESPONDANCES', PAD, curY);
+    c.letterSpacing='0px';
+    curY+=24;
+
     top3.forEach((s,i)=>{
-        const ty=sepY+82+i*52;
-        // Bar background
-        c.fillStyle='rgba(255,255,255,0.05)';
-        roundRect(c,80,ty,W-160,34,6);c.fill();
-        // Bar fill
-        const bw=(W-160)*(s.s/100);
-        c.fillStyle=i===0?'rgba(200,165,92,0.35)':'rgba(200,165,92,0.12)';
-        roundRect(c,80,ty,bw,34,6);c.fill();
-        // Label
-        c.font=`${i===0?'600':'400'} 18px Satoshi, sans-serif`;
-        c.fillStyle=i===0?'#FAFAF8':'rgba(250,250,248,0.6)';
-        c.fillText(`${s.p.e}  ${s.p.n}`, 94, ty+22);
+        const bh=48, bw=W-PAD*2;
+        // Fond
+        c.fillStyle='rgba(255,255,255,0.04)'; rr(PAD,curY,bw,bh,8); c.fill();
+        // Fill bar
+        const fw=Math.max((bw)*(s.s/100),bh);
+        const bg=c.createLinearGradient(PAD,0,PAD+fw,0);
+        bg.addColorStop(0,i===0?'rgba(200,165,92,0.28)':'rgba(200,165,92,0.09)');
+        bg.addColorStop(1,'rgba(200,165,92,0.02)');
+        c.fillStyle=bg; rr(PAD,curY,fw,bh,8); c.fill();
+        // Nom profil (sans emoji)
+        c.font=`${i===0?'600':'400'} 17px -apple-system,"Segoe UI",sans-serif`;
+        c.fillStyle=i===0?CREAM:MUTED;
+        c.fillText(s.p.n, PAD+16, curY+30);
         // Score
-        c.font='600 18px Satoshi, sans-serif';
-        c.fillStyle=i===0?'#C8A55C':'rgba(200,165,92,0.6)';
+        c.font='600 17px -apple-system,"Segoe UI",sans-serif';
+        c.fillStyle=i===0?GOLD:'rgba(200,165,92,0.55)';
         const pct=`${s.s.toFixed(0)}%`;
-        c.fillText(pct, W-80-c.measureText(pct).width-14, ty+22);
+        c.fillText(pct, W-PAD-c.measureText(pct).width-16, curY+30);
+        curY+=bh+8;
     });
 
-    // Ligne bottom
-    c.strokeStyle='#C8A55C';c.lineWidth=2;
-    c.beginPath();c.moveTo(80,H-80);c.lineTo(W-80,H-80);c.stroke();
+    // ── Footer ────────────────────────────────────────────────
+    const footY=H-52;
+    c.strokeStyle='rgba(200,165,92,0.15)'; c.lineWidth=1;
+    c.beginPath(); c.moveTo(PAD,footY-24); c.lineTo(W-PAD,footY-24); c.stroke();
 
-    // Copyright discret
-    c.font='400 18px Satoshi, sans-serif';
-    c.fillStyle='rgba(250,250,248,0.25)';
-    c.fillText('Par Hermas · IBUDO Innovation Hub', 80, H-44);
-    c.fillStyle='rgba(200,165,92,0.4)';
-    const url='hermas-ayi.github.io/d-innovation';
-    c.fillText(url, W-80-c.measureText(url).width, H-44);
+    c.font='400 16px -apple-system,"Segoe UI",sans-serif';
+    c.fillStyle='rgba(245,241,232,0.2)';
+    c.fillText('Par Hermas', PAD, footY);
 
-    // Téléchargement
+    c.fillStyle='rgba(200,165,92,0.35)';
+    const url='diagnostic.oae';
+    c.fillText(url, W-PAD-c.measureText(url).width, footY);
+
+    // ── Download ──────────────────────────────────────────────
     const link=document.createElement('a');
-    link.download=`diagnostic-${(name||best.p.n).toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'')}.png`;
+    const slug=(name||best.p.n).toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');
+    link.download=`oae-${slug}.png`;
     link.href=canvas.toDataURL('image/png');
     link.click();
     toast('Image téléchargée ✦');
 }
 
-function roundRect(ctx,x,y,w,h,r){
-    ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);ctx.lineTo(x+r,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h-r);ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.closePath();
-}
 
 function resetAll(){questions.forEach(q=>{answers[q.name]=[];});ci=0;resSection.classList.remove('show');resSection.innerHTML='';diagCard.style.display='';diagNav.style.display='';diagProgressBar.style.display='';diagDots.style.display='';renderQ(0);window.scrollTo({top:0,behavior:'smooth'});}
 renderQ(0);

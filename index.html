@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diagnostic OAE — Par Hermas / IBUDO</title>
+    <title>Diagnostic OAE — Par Hermas</title>
     <meta name="description" content="Identifiez le profil exact de votre institution d'innovation en 7 questions. Diagnostic OAE gratuit avec recommandations stratégiques personnalisées.">
     <meta property="og:title" content="Diagnostic OAE">
     <meta property="og:description" content="Quel est le profil exact de votre institution d'innovation ? Diagnostic OAE gratuit, résultats immédiats, recommandations personnalisées.">
@@ -207,7 +207,7 @@
         <p>Gratuit, sans inscription, résultats immédiats.</p>
         <button class="btn-hero btn-hero-primary" onclick="startDiagnostic()">Commencer maintenant →</button>
     </section>
-    <footer class="site-footer">Conçu par <a href="#">Hermas</a> · Propulsé par <a href="#">IBUDO</a> · Diagnostic OAE · 2025</footer>
+    <footer class="site-footer">Conçu par <a href="#">Hermas</a> · Diagnostic OAE · 2025</footer>
 </div>
 
 <div id="diagPage" class="diagnostic-wrapper">
@@ -352,198 +352,205 @@ function showResult(){
 function generateShareCard(best, top3){
     const name = ($('institutionName')?.value||'').trim();
     const recos = [...best.p.r].slice(0,3);
-
-    const W=1080, H=1350;
+    const W=1080, H=1440;
     const canvas=document.createElement('canvas');
     canvas.width=W; canvas.height=H;
     const c=canvas.getContext('2d');
 
-    // ── Helpers ──────────────────────────────────────────────
-    function rr(x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.lineTo(x+w-r,y);c.quadraticCurveTo(x+w,y,x+w,y+r);c.lineTo(x+w,y+h-r);c.quadraticCurveTo(x+w,y+h,x+w-r,y+h);c.lineTo(x+r,y+h);c.quadraticCurveTo(x,y+h,x,y+h-r);c.lineTo(x,y+r);c.quadraticCurveTo(x,y,x+r,y);c.closePath();}
-    function wrapText(text,x,y,maxW,font,color,lineH){
-        c.font=font; c.fillStyle=color;
-        const words=text.split(' '); let line='';
+    const GOLD='#C8A55C', CREAM='#F0EBE0', DIM='rgba(240,235,224,0.40)', DIMMER='rgba(240,235,224,0.20)';
+    const P=72;
+
+    function rr(x,y,w,h,r){
+        c.beginPath();c.moveTo(x+r,y);c.lineTo(x+w-r,y);c.quadraticCurveTo(x+w,y,x+w,y+r);
+        c.lineTo(x+w,y+h-r);c.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+        c.lineTo(x+r,y+h);c.quadraticCurveTo(x,y+h,x,y+h-r);
+        c.lineTo(x,y+r);c.quadraticCurveTo(x,y,x+r,y);c.closePath();
+    }
+    function wrap(txt,x,y,maxW,fnt,col,lh){
+        c.font=fnt; c.fillStyle=col;
+        const words=txt.split(' '); let line='';
         for(let i=0;i<words.length;i++){
             const t=line+(line?' ':'')+words[i];
-            if(c.measureText(t).width>maxW&&line){c.fillText(line,x,y);line=words[i];y+=lineH;}
+            if(c.measureText(t).width>maxW&&line){c.fillText(line,x,y);line=words[i];y+=lh;}
             else line=t;
         }
         c.fillText(line,x,y); return y;
     }
-    const GOLD='#C8A55C', GOLD2='rgba(200,165,92,0.18)', CREAM='#F5F1E8', MUTED='rgba(245,241,232,0.45)', DIM='rgba(245,241,232,0.22)';
-    const PAD=80;
+    function trunc(txt,maxW,fnt){
+        c.font=fnt;
+        if(c.measureText(txt).width<=maxW) return txt;
+        while(txt.length>4&&c.measureText(txt+'…').width>maxW) txt=txt.slice(0,-1);
+        return txt+'…';
+    }
+    function hline(y,a=0.10){
+        c.strokeStyle='rgba(200,165,92,'+a+')'; c.lineWidth=1;
+        c.beginPath(); c.moveTo(P,y); c.lineTo(W-P,y); c.stroke();
+    }
 
-    // ── Fond ─────────────────────────────────────────────────
-    c.fillStyle='#0B0B0B'; c.fillRect(0,0,W,H);
+    /* ── FOND ──────────────────────────────────────── */
+    const bgG=c.createLinearGradient(0,0,W,H);
+    bgG.addColorStop(0,'#0D0C0A'); bgG.addColorStop(1,'#131109');
+    c.fillStyle=bgG; c.fillRect(0,0,W,H);
+
+    // Halos
+    const h1=c.createRadialGradient(160,160,0,160,160,580);
+    h1.addColorStop(0,'rgba(200,165,92,0.10)'); h1.addColorStop(1,'rgba(200,165,92,0)');
+    c.fillStyle=h1; c.fillRect(0,0,W,H);
+    const h2=c.createRadialGradient(W-P,H,0,W-P,H,420);
+    h2.addColorStop(0,'rgba(55,75,140,0.07)'); h2.addColorStop(1,'rgba(55,75,140,0)');
+    c.fillStyle=h2; c.fillRect(0,0,W,H);
 
     // Grain
-    for(let i=0;i<24000;i++){
-        c.fillStyle=`rgba(255,255,255,${Math.random()*0.018})`;
+    for(let i=0;i<22000;i++){
+        c.fillStyle='rgba(255,255,255,'+(Math.random()*0.015)+')';
         c.fillRect(Math.random()*W,Math.random()*H,1,1);
     }
 
-    // Lueur dorée coin haut-droit
-    const gl=c.createRadialGradient(W,0,0,W,0,700);
-    gl.addColorStop(0,'rgba(200,165,92,0.09)'); gl.addColorStop(1,'rgba(200,165,92,0)');
-    c.fillStyle=gl; c.fillRect(0,0,W,H);
+    /* ── CADRE ──────────────────────────────────────── */
+    const fG=c.createLinearGradient(0,0,W,H);
+    fG.addColorStop(0,'rgba(200,165,92,0.40)');
+    fG.addColorStop(0.5,'rgba(200,165,92,0.12)');
+    fG.addColorStop(1,'rgba(200,165,92,0.38)');
+    c.strokeStyle=fG; c.lineWidth=1.5; rr(20,20,W-40,H-40,20); c.stroke();
 
-    // Lueur froide coin bas-gauche
-    const gl2=c.createRadialGradient(0,H,0,0,H,500);
-    gl2.addColorStop(0,'rgba(80,100,160,0.06)'); gl2.addColorStop(1,'rgba(80,100,160,0)');
-    c.fillStyle=gl2; c.fillRect(0,0,W,H);
+    // Ligne top dégradée
+    const tlG=c.createLinearGradient(P,0,W-P,0);
+    tlG.addColorStop(0,'rgba(200,165,92,0)'); tlG.addColorStop(0.2,GOLD);
+    tlG.addColorStop(0.8,GOLD); tlG.addColorStop(1,'rgba(200,165,92,0)');
+    c.strokeStyle=tlG; c.lineWidth=1;
+    c.beginPath(); c.moveTo(P,56); c.lineTo(W-P,56); c.stroke();
 
-    // Arc décoratif discret
-    c.save(); c.strokeStyle='rgba(200,165,92,0.07)'; c.lineWidth=120;
-    c.beginPath(); c.arc(W+200,−200,700,0,Math.PI*2); c.stroke(); c.restore();
-
-    // ── Bordure extérieure fine ───────────────────────────────
-    c.strokeStyle='rgba(200,165,92,0.2)'; c.lineWidth=1.5;
-    rr(20,20,W-40,H-40,16); c.stroke();
-
-    // ── Header ───────────────────────────────────────────────
-    // Tag outil
-    c.fillStyle=GOLD2; rr(PAD,PAD,260,36,6); c.fill();
-    c.font='600 15px -apple-system,"Segoe UI",sans-serif';
-    c.fillStyle=GOLD; c.letterSpacing='2.5px';
-    c.fillText('DIAGNOSTIC OAE', PAD+16, PAD+23);
+    /* ── HEADER ──────────────────────────────────────── */
+    c.fillStyle='rgba(200,165,92,0.11)'; rr(P,74,242,34,5); c.fill();
+    c.strokeStyle='rgba(200,165,92,0.24)'; c.lineWidth=1; rr(P,74,242,34,5); c.stroke();
+    c.font='700 11px -apple-system,"Segoe UI",sans-serif';
+    c.fillStyle=GOLD; c.letterSpacing='3px';
+    c.fillText('DIAGNOSTIC OAE', P+14, 97);
     c.letterSpacing='0px';
 
-    // Date
     const now=new Date();
-    const dateStr=now.toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
-    c.font='400 15px -apple-system,"Segoe UI",sans-serif';
-    c.fillStyle=DIM;
-    c.fillText(dateStr, W-PAD-c.measureText(dateStr).width, PAD+23);
+    const dateStr=now.toLocaleDateString('fr-FR',{month:'long',year:'numeric'});
+    c.font='400 13px -apple-system,"Segoe UI",sans-serif'; c.fillStyle=DIMMER;
+    c.fillText(dateStr, W-P-c.measureText(dateStr).width, 97);
 
-    // ── Nom structure ─────────────────────────────────────────
-    let curY = PAD+80;
+    /* ── PROFIL ──────────────────────────────────────── */
+    let cy=172;
     if(name){
-        c.font='500 26px -apple-system,"Segoe UI",sans-serif';
-        c.fillStyle=MUTED;
-        c.fillText(name, PAD, curY);
-        curY+=42;
-    } else curY+=16;
+        c.font='500 21px -apple-system,"Segoe UI",sans-serif'; c.fillStyle=DIM;
+        c.fillText(trunc(name.toUpperCase(),W-P*2,'500 21px sans-serif'), P, cy);
+        cy+=38;
+    }
+    c.font='52px serif'; c.fillText(best.p.e, P, cy+46); cy+=66;
 
-    // ── Profil — nom en grand serif ───────────────────────────
-    c.fillStyle=CREAM;
-    curY = wrapText(best.p.n, PAD, curY+56, W-PAD*2, 'italic 700 74px Georgia,serif', CREAM, 86)+16;
+    // Nom profil
+    cy=wrap(best.p.n, P, cy, W-P*2-32,
+        'italic 700 64px Georgia,"Times New Roman",serif', CREAM, 76)+10;
 
-    // Trait décoratif sous le titre
-    const gradLine=c.createLinearGradient(PAD,0,PAD+300,0);
-    gradLine.addColorStop(0,GOLD); gradLine.addColorStop(1,'rgba(200,165,92,0)');
-    c.strokeStyle=gradLine; c.lineWidth=2;
-    c.beginPath(); c.moveTo(PAD,curY); c.lineTo(PAD+320,curY); c.stroke();
-    curY+=32;
+    // Trait
+    const tG=c.createLinearGradient(P,0,P+340,0);
+    tG.addColorStop(0,GOLD); tG.addColorStop(1,'rgba(200,165,92,0)');
+    c.strokeStyle=tG; c.lineWidth=2;
+    c.beginPath(); c.moveTo(P,cy); c.lineTo(P+340,cy); c.stroke(); cy+=30;
 
-    // ── Score pill ────────────────────────────────────────────
-    const pillW=260, pillH=64;
-    const pillG=c.createLinearGradient(PAD,0,PAD+pillW,0);
-    pillG.addColorStop(0,'rgba(200,165,92,0.22)'); pillG.addColorStop(1,'rgba(200,165,92,0.06)');
-    c.fillStyle=pillG; rr(PAD,curY,pillW,pillH,pillH/2); c.fill();
-    c.strokeStyle='rgba(200,165,92,0.3)'; c.lineWidth=1;
-    rr(PAD,curY,pillW,pillH,pillH/2); c.stroke();
+    // Description
+    cy=wrap(best.p.d, P, cy, W-P*2,
+        '300 18px -apple-system,"Segoe UI",sans-serif', DIM, 28)+24;
 
-    c.font='700 32px Georgia,serif';
-    c.fillStyle=GOLD;
-    c.fillText(`${best.s.toFixed(0)}%`, PAD+24, curY+41);
-    c.font='400 17px -apple-system,"Segoe UI",sans-serif';
-    c.fillStyle=MUTED;
-    c.fillText('de correspondance', PAD+90, curY+41);
-    curY+=pillH+48;
+    /* ── SCORE ──────────────────────────────────────── */
+    const sW=W-P*2, sH=76;
+    const sG=c.createLinearGradient(P,cy,P+sW,cy+sH);
+    sG.addColorStop(0,'rgba(200,165,92,0.17)'); sG.addColorStop(1,'rgba(200,165,92,0.04)');
+    c.fillStyle=sG; rr(P,cy,sW,sH,12); c.fill();
+    c.strokeStyle='rgba(200,165,92,0.22)'; c.lineWidth=1; rr(P,cy,sW,sH,12); c.stroke();
+    c.font='700 36px Georgia,serif'; c.fillStyle=GOLD;
+    c.fillText(best.s.toFixed(0)+'%', P+22, cy+49);
+    c.font='400 17px -apple-system,"Segoe UI",sans-serif'; c.fillStyle=DIM;
+    c.fillText('de correspondance avec ce profil', P+106, cy+49);
+    cy+=sH+44;
 
-    // ── Séparateur ────────────────────────────────────────────
-    c.strokeStyle='rgba(245,241,232,0.08)'; c.lineWidth=1;
-    c.beginPath(); c.moveTo(PAD,curY); c.lineTo(W-PAD,curY); c.stroke();
-    curY+=40;
+    /* ── RECOMMANDATIONS ──────────────────────────────── */
+    hline(cy); cy+=38;
+    c.font='700 11px -apple-system,"Segoe UI",sans-serif';
+    c.fillStyle=GOLD; c.letterSpacing='2.5px';
+    c.fillText('RECOMMANDATIONS', P, cy); c.letterSpacing='0px'; cy+=22;
 
-    // ── Recommandations ───────────────────────────────────────
-    c.font='600 13px -apple-system,"Segoe UI",sans-serif';
-    c.fillStyle=GOLD; c.letterSpacing='2px';
-    c.fillText('RECOMMANDATIONS', PAD, curY);
-    c.letterSpacing='0px';
-    curY+=28;
-
-    recos.forEach((r,i)=>{
-        // Fond carte
-        c.fillStyle=i===0?'rgba(200,165,92,0.07)':'rgba(255,255,255,0.03)';
-        const rh=80;
-        rr(PAD, curY, W-PAD*2, rh, 10); c.fill();
-        if(i===0){c.strokeStyle='rgba(200,165,92,0.18)';c.lineWidth=1;rr(PAD,curY,W-PAD*2,rh,10);c.stroke();}
-
+    recos.forEach(function(r,i){
+        const rh=88, rw=W-P*2;
+        const rG=c.createLinearGradient(P,cy,P+rw,cy);
+        rG.addColorStop(0, i===0?'rgba(200,165,92,0.10)':'rgba(255,255,255,0.028)');
+        rG.addColorStop(1,'rgba(0,0,0,0)');
+        c.fillStyle=rG; rr(P,cy,rw,rh,10); c.fill();
+        // Bordure gauche
+        c.fillStyle=i===0?GOLD:'rgba(200,165,92,0.28)'; rr(P,cy,3,rh,2); c.fill();
         // Numéro
-        c.font='700 15px Georgia,serif'; c.fillStyle=GOLD;
-        c.fillText(`0${i+1}`, PAD+18, curY+rh/2+6);
-
-        // Texte — wrap dans la carte
-        const tx=PAD+54, tmaxW=W-PAD*2-70;
+        c.font='700 13px Georgia,serif'; c.fillStyle=i===0?GOLD:'rgba(200,165,92,0.45)';
+        c.fillText(''+(i+1), P+16, cy+rh/2+5);
+        // Texte — 2 lignes max
+        const tx=P+40, tmW=rw-58;
         c.font='400 17px -apple-system,"Segoe UI",sans-serif';
-        c.fillStyle=i===0?CREAM:MUTED;
-        // Truncate si trop long
-        let rtext=r;
-        while(c.measureText(rtext).width>tmaxW&&rtext.length>20)rtext=rtext.slice(0,-1);
-        if(rtext.length<r.length)rtext=rtext.slice(0,-1)+'…';
-        c.fillText(rtext, tx, curY+rh/2+6);
-
-        curY+=rh+8;
+        c.fillStyle=i===0?CREAM:DIM;
+        const words=r.split(' '); let l1='',l2='',done=false;
+        words.forEach(function(w){
+            if(done) return;
+            const t1=l1+(l1?' ':'')+w;
+            if(c.measureText(t1).width<=tmW){l1=t1;}
+            else {
+                const t2=l2+(l2?' ':'')+w;
+                if(c.measureText(t2).width<=tmW){l2=t2;}
+                else {done=true; l2=trunc(l2+' '+w,tmW,'400 17px sans-serif');}
+            }
+        });
+        if(l2){c.fillText(l1,tx,cy+28);c.fillText(l2,tx,cy+54);}
+        else c.fillText(l1,tx,cy+rh/2+6);
+        cy+=rh+8;
     });
-    curY+=32;
+    cy+=30;
 
-    // ── Séparateur ────────────────────────────────────────────
-    c.strokeStyle='rgba(245,241,232,0.08)'; c.lineWidth=1;
-    c.beginPath(); c.moveTo(PAD,curY); c.lineTo(W-PAD,curY); c.stroke();
-    curY+=40;
+    /* ── CORRESPONDANCES ──────────────────────────────── */
+    hline(cy); cy+=36;
+    c.font='700 11px -apple-system,"Segoe UI",sans-serif';
+    c.fillStyle=GOLD; c.letterSpacing='2.5px';
+    c.fillText('CORRESPONDANCES', P, cy); c.letterSpacing='0px'; cy+=22;
 
-    // ── Correspondances ───────────────────────────────────────
-    c.font='600 13px -apple-system,"Segoe UI",sans-serif';
-    c.fillStyle=GOLD; c.letterSpacing='2px';
-    c.fillText('CORRESPONDANCES', PAD, curY);
-    c.letterSpacing='0px';
-    curY+=24;
-
-    top3.forEach((s,i)=>{
-        const bh=48, bw=W-PAD*2;
-        // Fond
-        c.fillStyle='rgba(255,255,255,0.04)'; rr(PAD,curY,bw,bh,8); c.fill();
-        // Fill bar
-        const fw=Math.max((bw)*(s.s/100),bh);
-        const bg=c.createLinearGradient(PAD,0,PAD+fw,0);
-        bg.addColorStop(0,i===0?'rgba(200,165,92,0.28)':'rgba(200,165,92,0.09)');
-        bg.addColorStop(1,'rgba(200,165,92,0.02)');
-        c.fillStyle=bg; rr(PAD,curY,fw,bh,8); c.fill();
-        // Nom profil (sans emoji)
-        c.font=`${i===0?'600':'400'} 17px -apple-system,"Segoe UI",sans-serif`;
-        c.fillStyle=i===0?CREAM:MUTED;
-        c.fillText(s.p.n, PAD+16, curY+30);
-        // Score
-        c.font='600 17px -apple-system,"Segoe UI",sans-serif';
-        c.fillStyle=i===0?GOLD:'rgba(200,165,92,0.55)';
-        const pct=`${s.s.toFixed(0)}%`;
-        c.fillText(pct, W-PAD-c.measureText(pct).width-16, curY+30);
-        curY+=bh+8;
+    top3.forEach(function(s,i){
+        const bh=52, bw=W-P*2;
+        c.fillStyle='rgba(255,255,255,0.035)'; rr(P,cy,bw,bh,8); c.fill();
+        const fw=Math.max(bw*(s.s/100),60);
+        const bG=c.createLinearGradient(P,cy,P+fw,cy);
+        bG.addColorStop(0, i===0?'rgba(200,165,92,0.26)':'rgba(200,165,92,0.09)');
+        bG.addColorStop(1,'rgba(200,165,92,0.01)');
+        c.fillStyle=bG; rr(P,cy,fw,bh,8); c.fill();
+        if(i===0){c.strokeStyle='rgba(200,165,92,0.18)';c.lineWidth=1;rr(P,cy,bw,bh,8);c.stroke();}
+        c.font=(i===0?'600':'400')+' 17px -apple-system,"Segoe UI",sans-serif';
+        c.fillStyle=i===0?CREAM:DIM;
+        c.fillText(trunc(s.p.n,bw-86,(i===0?'600':'400')+' 17px sans-serif'), P+16, cy+33);
+        c.font='600 17px -apple-system,"Segoe UI",sans-serif'; c.fillStyle=i===0?GOLD:'rgba(200,165,92,0.45)';
+        const pct=s.s.toFixed(0)+'%';
+        c.fillText(pct, W-P-c.measureText(pct).width-16, cy+33);
+        cy+=bh+7;
     });
 
-    // ── Footer ────────────────────────────────────────────────
-    const footY=H-52;
-    c.strokeStyle='rgba(200,165,92,0.15)'; c.lineWidth=1;
-    c.beginPath(); c.moveTo(PAD,footY-24); c.lineTo(W-PAD,footY-24); c.stroke();
+    /* ── FOOTER ──────────────────────────────────────── */
+    const footY=H-44;
+    const blG=c.createLinearGradient(P,0,W-P,0);
+    blG.addColorStop(0,'rgba(200,165,92,0)'); blG.addColorStop(0.2,GOLD);
+    blG.addColorStop(0.8,GOLD); blG.addColorStop(1,'rgba(200,165,92,0)');
+    c.strokeStyle=blG; c.lineWidth=1;
+    c.beginPath(); c.moveTo(P,footY-20); c.lineTo(W-P,footY-20); c.stroke();
+    c.font='400 14px -apple-system,"Segoe UI",sans-serif';
+    c.fillStyle='rgba(240,235,224,0.18)'; c.fillText('Par Hermas', P, footY);
+    c.fillStyle='rgba(200,165,92,0.30)';
+    const url='hermas-ayi.github.io/d-innovation';
+    c.fillText(url, W-P-c.measureText(url).width, footY);
 
-    c.font='400 16px -apple-system,"Segoe UI",sans-serif';
-    c.fillStyle='rgba(245,241,232,0.2)';
-    c.fillText('Par Hermas', PAD, footY);
-
-    c.fillStyle='rgba(200,165,92,0.35)';
-    const url='diagnostic.oae';
-    c.fillText(url, W-PAD-c.measureText(url).width, footY);
-
-    // ── Download ──────────────────────────────────────────────
+    /* ── DOWNLOAD ──────────────────────────────────────── */
     const link=document.createElement('a');
     const slug=(name||best.p.n).toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');
-    link.download=`oae-${slug}.png`;
-    link.href=canvas.toDataURL('image/png');
+    link.download='oae-'+slug+'.png';
+    link.href=canvas.toDataURL('image/png',0.95);
     link.click();
     toast('Image téléchargée ✦');
 }
-
 
 function resetAll(){questions.forEach(q=>{answers[q.name]=[];});ci=0;resSection.classList.remove('show');resSection.innerHTML='';diagCard.style.display='';diagNav.style.display='';diagProgressBar.style.display='';diagDots.style.display='';renderQ(0);window.scrollTo({top:0,behavior:'smooth'});}
 renderQ(0);

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Diagnostic des institutions d'innovation — Par Hermas / IBUDO</title>
-    <meta name="description" content="Identifiez le profil exact de votre institution d'innovation en 6 questions. Diagnostic gratuit avec recommandations stratégiques personnalisées.">
+    <meta name="description" content="Identifiez le profil exact de votre institution d'innovation en 7 questions. Diagnostic gratuit avec recommandations stratégiques personnalisées.">
     <meta property="og:title" content="Diagnostic des institutions d'innovation">
     <meta property="og:description" content="Quel est le profil exact de votre institution d'innovation ? Diagnostic gratuit, résultats immédiats, recommandations personnalisées.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -137,29 +137,13 @@
         .alt-banner{display:flex;align-items:center;gap:14px;padding:16px 20px;background:var(--warning-soft);border-radius:var(--radius-md);margin-top:14px;opacity:0;animation:dFadeUp .5s .1s var(--ease) forwards}.alt-banner p{font-size:14px;color:var(--text-2);line-height:1.5}.alt-banner strong{color:var(--text-1)}
         .summary-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}.s-tag{font-size:13px;padding:4px 10px;background:var(--surface-hover);border-radius:100px;color:var(--text-2)}.s-tag.main{background:var(--accent-soft);color:var(--accent-dark);font-weight:600}
         .btn-reset-full{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:16px;margin-top:20px;background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius-md);font-family:var(--font-body);font-size:15px;font-weight:600;color:var(--text-2);cursor:pointer;transition:all .25s var(--ease);opacity:0;animation:dFadeUp .5s .4s var(--ease) forwards}.btn-reset-full:hover{border-color:var(--text-3);color:var(--text-1);background:var(--surface-hover)}
-        /* Name modal */
-        .name-overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(15,15,15,.55);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:24px}
-        .name-overlay.open{display:flex}
-        .name-modal{background:var(--surface);border-radius:var(--radius-xl);padding:40px 36px;max-width:480px;width:100%;box-shadow:0 24px 64px rgba(0,0,0,.18);border:1px solid var(--border);opacity:0;transform:scale(.95) translateY(12px);transition:all .35s var(--ease)}
-        .name-overlay.open .name-modal{opacity:1;transform:scale(1) translateY(0)}
-        .name-modal-icon{width:52px;height:52px;border-radius:14px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:20px}
-        .name-modal h2{font-family:var(--font-display);font-size:24px;color:var(--text-1);margin-bottom:8px;letter-spacing:-.3px}
-        .name-modal p{font-size:14px;color:var(--text-2);margin-bottom:24px;line-height:1.5}
-        .name-input{width:100%;padding:16px 18px;border:1.5px solid var(--border);border-radius:var(--radius-md);font-family:var(--font-body);font-size:16px;color:var(--text-1);background:var(--bg);outline:none;transition:border-color .2s}
-        .name-input::placeholder{color:var(--text-3)}
-        .name-input:focus{border-color:var(--accent)}
-        .name-modal-actions{display:flex;gap:10px;margin-top:20px}
-        .name-modal-actions .d-btn{flex:1;justify-content:center}
 
-        /* Share button */
-        .btn-share{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:16px;margin-top:14px;background:linear-gradient(135deg,#1A1917,#2E2D2A);color:var(--cream);border:none;border-radius:var(--radius-md);font-family:var(--font-body);font-size:15px;font-weight:600;cursor:pointer;transition:all .25s var(--ease);opacity:0;animation:dFadeUp .5s .45s var(--ease) forwards}
-        .btn-share:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.15)}
-        .btn-share:active{transform:translateY(0)}
-        .btn-share svg{width:18px;height:18px}
+        .name-input-wrap{background:var(--surface);border-radius:var(--radius-lg);padding:28px;margin-top:14px;border:1px solid var(--border);opacity:0;animation:dFadeUp .5s .05s var(--ease) forwards}
+        .name-input-wrap label{display:block;font-size:13px;font-weight:600;color:var(--text-2);margin-bottom:10px;text-transform:uppercase;letter-spacing:1px}
+        .name-input-wrap input{width:100%;padding:14px 16px;border:1.5px solid var(--border);border-radius:var(--radius-md);font-family:var(--font-body);font-size:16px;color:var(--text-1);background:var(--bg);outline:none;transition:border-color .2s}.name-input-wrap input:focus{border-color:var(--accent)}.name-input-wrap input::placeholder{color:var(--text-3)}
+        .name-input-hint{font-size:13px;color:var(--text-3);margin-top:8px}
 
-        /* Hidden canvas */
-        #shareCanvas{display:none}
-
+        .btn-export{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:16px;margin-top:10px;background:var(--ink);color:var(--cream);border:none;border-radius:var(--radius-md);font-family:var(--font-body);font-size:15px;font-weight:600;cursor:pointer;transition:all .25s var(--ease);opacity:0;animation:dFadeUp .5s .45s var(--ease) forwards}.btn-export:hover{background:#222;transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,0,0,.15)}.btn-export span{font-size:18px}
         .toast-msg{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--text-1);color:white;padding:14px 24px;border-radius:var(--radius-md);font-size:14px;font-weight:500;box-shadow:0 12px 40px rgba(0,0,0,.15);z-index:1000;transition:transform .4s var(--bounce);pointer-events:none}.toast-msg.on{transform:translateX(-50%) translateY(0)}
 
         .slide-out-l{animation:soL .25s var(--ease) forwards}.slide-in-r{animation:siR .25s var(--ease) forwards}.slide-out-r{animation:soR .25s var(--ease) forwards}.slide-in-l{animation:siL .25s var(--ease) forwards}
@@ -180,7 +164,7 @@
     <div class="landing-inner">
         <div class="hero-badge">Outil ouvert &amp; gratuit</div>
         <h1 class="hero-title">Identifiez le profil<br>exact de votre<br>institution d'<em>innovation</em></h1>
-        <p class="hero-sub">6 questions. Un algorithme de correspondance multi-dimensionnel. Des recommandations stratégiques taillées sur mesure — quelle que soit votre structure.</p>
+        <p class="hero-sub">7 questions. Un algorithme de correspondance multi-dimensionnel. Des recommandations stratégiques taillées sur mesure — quelle que soit votre structure.</p>
         <div class="hero-actions">
             <button class="btn-hero btn-hero-primary" onclick="startDiagnostic()">Lancer le diagnostic →</button>
             <a href="#features" class="btn-hero btn-hero-ghost">En savoir plus</a>
@@ -189,7 +173,7 @@
 
     <section class="features" id="features">
         <div class="features-grid">
-            <div class="feature-card"><div class="feature-icon">⚡</div><div class="feature-title">6 dimensions analysées</div><div class="feature-desc">Infrastructure, échelle, collaboration, gouvernance, financement, fonctions — les axes structurants de toute institution d'innovation.</div></div>
+            <div class="feature-card"><div class="feature-icon">⚡</div><div class="feature-title">7 dimensions analysées</div><div class="feature-desc">Infrastructure, échelle, collaboration, gouvernance, financement, fonctions opérationnelles, rôle systémique — les axes structurants de toute institution d'innovation.</div></div>
             <div class="feature-card"><div class="feature-icon">🧬</div><div class="feature-title">Taxonomie complète</div><div class="feature-desc">Des fablabs aux systèmes nationaux d'innovation, des tech hubs aux districts industriels — l'ensemble du spectre des institutions est couvert.</div></div>
             <div class="feature-card"><div class="feature-icon">📊</div><div class="feature-title">Scoring pondéré</div><div class="feature-desc">Vos réponses sont classées par priorité. L'algorithme calcule un taux de correspondance pour chaque profil et détecte les hybridations.</div></div>
             <div class="feature-card"><div class="feature-icon">🎯</div><div class="feature-title">Recommandations ciblées</div><div class="feature-desc">Chaque diagnostic génère des recommandations adaptées à votre profil, vos forces et vos axes de développement spécifiques.</div></div>
@@ -200,7 +184,7 @@
         <div class="section-label">Comment ça marche</div>
         <div class="section-title">Un diagnostic en 3 étapes</div>
         <div class="how-grid">
-            <div class="how-step"><div class="how-num">01</div><div class="how-label">Décrivez</div><div class="how-desc">Répondez à 6 questions sur votre institution. Classez vos choix par priorité.</div></div>
+            <div class="how-step"><div class="how-num">01</div><div class="how-label">Décrivez</div><div class="how-desc">Répondez à 7 questions sur votre institution. Classez vos choix par priorité.</div></div>
             <div class="how-step"><div class="how-num">02</div><div class="how-label">Analysez</div><div class="how-desc">L'algorithme compare votre profil à l'ensemble de la taxonomie et calcule les correspondances.</div></div>
             <div class="how-step"><div class="how-num">03</div><div class="how-label">Agissez</div><div class="how-desc">Recevez votre profil, les alternatives proches, et des recommandations personnalisées.</div></div>
         </div>
@@ -227,32 +211,16 @@
 </div>
 
 <div id="diagPage" class="diagnostic-wrapper">
-    <div class="diag-topbar"><button class="diag-back" onclick="backToLanding()">← Retour</button><span class="diag-progress-mini" id="diagMini">1 / 6</span></div>
+    <div class="diag-topbar"><button class="diag-back" onclick="backToLanding()">← Retour</button><span class="diag-progress-mini" id="diagMini">1 / 7</span></div>
     <div class="diag-container">
-        <div class="diag-progress-bar" id="diagProgressBar"><div class="diag-progress-meta"><span class="diag-progress-label" id="diagLabel">Infrastructure</span><span class="diag-progress-step" id="diagStep">1 sur 6</span></div><div class="diag-progress-track"><div class="diag-progress-fill" id="diagFill" style="width:16.66%"></div></div></div>
-        <div class="diag-dots" id="diagDots"><div class="diag-dot active"></div><div class="diag-dot"></div><div class="diag-dot"></div><div class="diag-dot"></div><div class="diag-dot"></div><div class="diag-dot"></div></div>
+        <div class="diag-progress-bar" id="diagProgressBar"><div class="diag-progress-meta"><span class="diag-progress-label" id="diagLabel">Infrastructure</span><span class="diag-progress-step" id="diagStep">1 sur 7</span></div><div class="diag-progress-track"><div class="diag-progress-fill" id="diagFill" style="width:14.28%"></div></div></div>
+        <div class="diag-dots" id="diagDots"><div class="diag-dot active"></div><div class="diag-dot"></div><div class="diag-dot"></div><div class="diag-dot"></div><div class="diag-dot"></div><div class="diag-dot"></div><div class="diag-dot"></div></div>
         <div class="diag-card" id="diagCard"><div class="q-section" id="qSection"></div></div>
         <div class="diag-nav" id="diagNav"><button class="d-btn d-btn-secondary" id="dPrev" disabled>← Précédent</button><button class="d-btn d-btn-primary" id="dNext">Suivant →</button></div>
         <div class="res-section" id="resSection"></div>
     </div>
 </div>
 <div class="toast-msg" id="toastEl"></div>
-
-<!-- Name modal -->
-<div class="name-overlay" id="nameOverlay">
-    <div class="name-modal">
-        <div class="name-modal-icon">🏷️</div>
-        <h2>Nommez votre institution</h2>
-        <p>Ce nom apparaîtra sur l'image de partage de votre diagnostic. Vous pouvez aussi passer cette étape.</p>
-        <input type="text" class="name-input" id="nameInput" placeholder="Ex : IBUDO, Station F, UM6P…" maxlength="60" autocomplete="off">
-        <div class="name-modal-actions">
-            <button class="d-btn d-btn-secondary" id="nameSkip">Passer</button>
-            <button class="d-btn d-btn-primary" id="nameConfirm">Voir le diagnostic →</button>
-        </div>
-    </div>
-</div>
-
-<canvas id="shareCanvas"></canvas>
 
 <script>
 (function(){
@@ -268,34 +236,36 @@ options:[{value:"public",label:"Public",desc:"État, collectivité, université"
 {id:5,name:"financement",label:"Financement",title:"Comment l'institution est-elle financée ?",hint:"Classez les sources par importance.",
 options:[{value:"subventions",label:"Subventions publiques",desc:"Fonds publics, aides d'État"},{value:"investissements",label:"Investissements privés",desc:"Capital-risque, participation"},{value:"cotisations",label:"Cotisations",desc:"Adhésions des membres"},{value:"prestations",label:"Prestations",desc:"Formations, locations, conseil"},{value:"mecenat",label:"Mécénat / Dons / Coopération",desc:"Philanthropie, aide internationale"},{value:"production",label:"Revenus de production",desc:"Vente de produits, licences, brevets"},{value:"mixte",label:"Mixte",desc:"Sources multiples équilibrées"}]},
 {id:6,name:"fonction",label:"Fonctions",title:"Quelles sont les fonctions principales ?",hint:"Classez par importance.",
-options:[{value:"formation",label:"Formation",desc:"Ateliers, montée en compétences"},{value:"incubation",label:"Incubation",desc:"Accompagnement de jeunes pousses"},{value:"acceleration",label:"Accélération",desc:"Programme intensif de croissance"},{value:"experimentation",label:"Expérimentation",desc:"Prototypage, tests"},{value:"recherche",label:"R&D",desc:"Recherche & développement"},{value:"miseenreseau",label:"Mise en réseau",desc:"Animation, événements"},{value:"financement",label:"Financement direct",desc:"Investissement, amorçage"},{value:"hebergement",label:"Hébergement",desc:"Espaces mis à disposition"},{value:"production",label:"Production / Fabrication",desc:"Manufacture, assemblage"},{value:"politique",label:"Politique / Stratégie",desc:"Cadrage, coordination, régulation"},{value:"transfert",label:"Transfert technologique",desc:"Valorisation, brevets, licences"}]}
+options:[{value:"formation",label:"Formation",desc:"Ateliers, montée en compétences"},{value:"incubation",label:"Incubation",desc:"Accompagnement de jeunes pousses"},{value:"acceleration",label:"Accélération",desc:"Programme intensif de croissance"},{value:"experimentation",label:"Expérimentation",desc:"Prototypage, tests"},{value:"recherche",label:"R&D",desc:"Recherche & développement"},{value:"miseenreseau",label:"Mise en réseau",desc:"Animation, événements"},{value:"financement",label:"Financement direct",desc:"Investissement, amorçage"},{value:"hebergement",label:"Hébergement",desc:"Espaces mis à disposition"},{value:"production",label:"Production / Fabrication",desc:"Manufacture, assemblage"},{value:"politique",label:"Politique / Stratégie",desc:"Cadrage, coordination, régulation"},{value:"transfert",label:"Transfert technologique",desc:"Valorisation, brevets, licences"}]},
+{id:7,name:"role_systemique",label:"Rôle systémique",title:"Quel est le rôle principal de votre institution dans la dynamique d'innovation ?",hint:"Identifiez la fonction dominante que remplit votre institution dans l'écosystème — ce qu'elle produit pour les autres acteurs, pas seulement pour elle-même.",
+options:[{value:"allocation",label:"Allocation du capital",desc:"Orienter les ressources financières vers les bons projets et acteurs"},{value:"coordination",label:"Coordination",desc:"Faire collaborer des acteurs qui ne le feraient pas spontanément"},{value:"connaissance",label:"Production de connaissance",desc:"Générer de nouveaux savoirs, fondamentaux ou appliqués"},{value:"experimentation",label:"Expérimentation",desc:"Tester des solutions en conditions réelles avec de vrais usagers"},{value:"diffusion",label:"Diffusion",desc:"Propager innovations et apprentissages au-delà de son périmètre direct"}]}
 ];
 
 const P=[
-{n:"Fablab / Makerspace associatif",e:"🔧",d:"Atelier communautaire ouvert à tous, géré par une association. Culture maker, prototypage, partage de compétences. Ancrage local fort.",c:{infrastructure:{atelier:10,tierslieu:5,formation:3},echelle:{micro:10,meso:5},logique:{reseau:10,ecosysteme:2},initiateur:{associatif:10,mixte:3},financement:{cotisations:10,subventions:7,prestations:5,mecenat:3},fonction:{experimentation:10,formation:8,miseenreseau:5}},r:["Renforcez votre modèle économique par des prestations (formations, locations).","Mutualisez vos achats avec d'autres fablabs via des réseaux régionaux.","Valorisez votre impact social pour obtenir des subventions ESS."]},
-{n:"Pôle de compétitivité / Cluster labellisé",e:"🏛️",d:"Structure labellisée rassemblant grands groupes, PME et laboratoires autour d'une filière stratégique.",c:{infrastructure:{bureaux:8,labos:5,rien:3},echelle:{macro:10,mega:5,meso:3},logique:{cluster:10,reseau:5,ecosysteme:3},initiateur:{public:10,mixte:7,prive:2},financement:{subventions:10,cotisations:8,mixte:5},fonction:{miseenreseau:10,recherche:8,formation:3,acceleration:3}},r:["Développez des actions de veille et d'intelligence économique.","Facilitez l'émergence de projets collaboratifs multi-acteurs.","Travaillez votre visibilité internationale pour attirer des investisseurs."]},
-{n:"Incubateur universitaire / académique",e:"🎓",d:"Structure adossée à une université, accompagnant projets de recherche et entrepreneuriat étudiant.",c:{infrastructure:{bureaux:10,labos:7,formation:8},echelle:{meso:10,macro:7,micro:3},logique:{reseau:8,cluster:3,ecosysteme:2},initiateur:{public:10,mixte:5},financement:{subventions:10,mixte:7,mecenat:3},fonction:{incubation:10,formation:8,recherche:5,miseenreseau:3}},r:["Renforcez les liens avec le tissu économique local.","Proposez des formations à l'entrepreneuriat pour étudiants et doctorants.","Mettez en place un fonds d'amorçage académique."]},
-{n:"Accélérateur privé / Corporate",e:"🚀",d:"Programme intensif porté par le privé pour faire croître rapidement des start-up à fort potentiel.",c:{infrastructure:{bureaux:10,formation:7},echelle:{macro:10,mega:8,meso:3},logique:{reseau:8,cluster:3,ecosysteme:2},initiateur:{prive:10,mixte:5},financement:{investissements:10,prestations:3,mixte:5},fonction:{acceleration:10,financement:8,incubation:5,miseenreseau:5}},r:["Diversifiez votre réseau de mentors sectoriels.","Organisez des démos days réguliers.","Proposez des programmes thématiques (deep tech, greentech)."]},
-{n:"Living lab territorial",e:"🌿",d:"Dispositif d'expérimentation en conditions réelles avec citoyens, entreprises et chercheurs sur un territoire.",c:{infrastructure:{territoire:10,tierslieu:7,labos:5,bureaux:3},echelle:{meso:10,macro:5,micro:5},logique:{reseau:8,ecosysteme:5,cluster:2},initiateur:{public:10,mixte:7,associatif:3},financement:{subventions:10,mixte:5,prestations:3},fonction:{experimentation:10,miseenreseau:7,recherche:5,formation:3}},r:["Impliquez les citoyens dès la conception des expérimentations.","Documentez et partagez les retours d'expérience.","Créez des passerelles avec d'autres living labs."]},
-{n:"Espace de coworking / Tiers-lieu privé",e:"💼",d:"Lieu de travail partagé avec services, hébergement et mise en relation informelle des professionnels.",c:{infrastructure:{bureaux:10,tierslieu:8,formation:3},echelle:{meso:10,micro:8,macro:2},logique:{reseau:8,ecosysteme:2},initiateur:{prive:10,associatif:3},financement:{prestations:10,cotisations:5,investissements:3},fonction:{hebergement:10,miseenreseau:7,formation:5}},r:["Développez une programmation événementielle pour fidéliser.","Proposez des formules d'abonnement flexibles.","Créez des partenariats avec des entreprises locales."]},
-{n:"Campus d'innovation international",e:"🌐",d:"Grande structure intégrée : recherche, formation, incubation, accélération à rayonnement mondial. Type UM6P, Sophia Antipolis.",c:{infrastructure:{labos:10,bureaux:9,formation:9,atelier:7,tierslieu:6,studio:4},echelle:{mega:10,macro:9,meso:5},logique:{ecosysteme:10,reseau:8,cluster:5},initiateur:{mixte:10,prive:8,public:5},financement:{mixte:10,investissements:8,subventions:5,mecenat:5},fonction:{recherche:10,incubation:9,acceleration:8,formation:8,experimentation:7,miseenreseau:7}},r:["Capitalisez sur votre rayonnement pour attirer les meilleurs talents.","Développez des chaires de recherche avec des partenaires globaux.","Créez un fonds d'investissement dédié."]},
-{n:"Réseau informel / Communauté",e:"🤝",d:"Pas de lieu physique, fonctionnant par rencontres régulières, adhésion volontaire ou bénévolat.",c:{infrastructure:{rien:10},echelle:{meso:8,macro:5,micro:5},logique:{reseau:10,ecosysteme:3},initiateur:{associatif:10,mixte:3},financement:{cotisations:10,mecenat:3},fonction:{miseenreseau:10,formation:3}},r:["Formalisez certains processus (charte, groupes de travail).","Cherchez des financements pour un animateur permanent.","Créez des outils numériques collaboratifs."]},
-{n:"Technopole / Parc scientifique",e:"🏗️",d:"Grand espace aménagé accueillant entreprises innovantes, laboratoires et services mutualisés.",c:{infrastructure:{bureaux:10,labos:9,formation:7,tierslieu:5},echelle:{meso:10,macro:8,mega:3},logique:{reseau:8,cluster:7,ecosysteme:5},initiateur:{public:9,mixte:8,prive:3},financement:{mixte:10,subventions:8,prestations:7},fonction:{hebergement:10,miseenreseau:8,recherche:7,incubation:6}},r:["Ancrez votre projet dans une stratégie territoriale.","Proposez des services mutualisés aux résidents.","Développez une offre de vie autour du parc."]},
-{n:"Centre de formation / Académie d'innovation",e:"📚",d:"Structure dédiée à la montée en compétences et formation professionnelle dans l'innovation et le numérique.",c:{infrastructure:{formation:10,bureaux:6,studio:4},echelle:{meso:8,macro:7,micro:4},logique:{reseau:6,hierarchique:5},initiateur:{prive:7,public:6,mixte:5},financement:{prestations:10,subventions:7,cotisations:4},fonction:{formation:10,miseenreseau:4,experimentation:3}},r:["Certifiez vos formations (labels qualité, reconnaissance nationale).","Développez des programmes en ligne pour étendre votre portée.","Créez des parcours en partenariat avec des universités."]},
-{n:"Tech Hub / Hub technologique",e:"⚡",d:"Espace concentrant startups tech, développeurs et entrepreneurs numériques. Axé sur l'écosystème tech local.",c:{infrastructure:{bureaux:10,formation:7,tierslieu:6,studio:4},echelle:{meso:10,macro:7,mega:4},logique:{ecosysteme:7,reseau:8,cluster:4},initiateur:{prive:10,mixte:5,associatif:3},financement:{prestations:8,investissements:7,mixte:5,cotisations:4},fonction:{hebergement:8,incubation:7,miseenreseau:8,formation:6,acceleration:5}},r:["Positionnez-vous comme vitrine du talent tech local.","Développez des partenariats internationaux.","Organisez des hackathons réguliers pour animer la communauté."]},
-{n:"Cluster technologique",e:"🔗",d:"Concentration géographique d'entreprises tech, fournisseurs spécialisés et institutions associées dans un secteur de pointe.",c:{infrastructure:{bureaux:8,labos:7,usine:5},echelle:{meso:10,macro:8,mega:4},logique:{cluster:10,reseau:6,ecosysteme:4},initiateur:{prive:8,public:6,mixte:7},financement:{mixte:8,investissements:7,subventions:6,prestations:4},fonction:{recherche:8,production:7,miseenreseau:7,transfert:6,formation:4}},r:["Renforcez les liens dans la chaîne de valeur entre entreprises.","Développez une marque territoriale forte.","Investissez dans la formation spécialisée."]},
-{n:"District industriel",e:"🏭",d:"Système productif local de PME spécialisées coopérant dans un même secteur, avec fort enracinement socio-culturel.",c:{infrastructure:{usine:10,bureaux:5,formation:3},echelle:{meso:10,macro:5,micro:7},logique:{cluster:10,reseau:5,ecosysteme:3},initiateur:{prive:10,associatif:4,public:3},financement:{production:10,prestations:5,cotisations:4},fonction:{production:10,miseenreseau:6,formation:4,experimentation:3}},r:["Modernisez votre base productive avec des technologies numériques.","Créez un centre de design et d'innovation partagé.","Renforcez les liens avec les universités."]},
-{n:"Écosystème d'innovation territorial",e:"🌍",d:"Système auto-organisé rassemblant entreprises, universités et institutions sur un territoire. Dynamique émergente et vertueuse.",c:{infrastructure:{bureaux:8,labos:8,formation:7,tierslieu:7,atelier:5},echelle:{meso:10,macro:9,mega:6},logique:{ecosysteme:10,reseau:8,cluster:6},initiateur:{mixte:10,public:7,prive:7,associatif:4},financement:{mixte:10,investissements:7,subventions:7,prestations:5},fonction:{miseenreseau:10,incubation:8,recherche:8,formation:7,acceleration:6,experimentation:6}},r:["Documentez et rendez visible la dynamique émergente.","Créez des espaces de gouvernance partagée multi-acteurs.","Investissez dans des indicateurs d'impact systémique."]},
-{n:"Système national d'innovation",e:"🗺️",d:"Ensemble des institutions, politiques et flux de connaissance déterminant la capacité d'innovation d'un pays.",c:{infrastructure:{labos:7,bureaux:5,formation:7,territoire:5},echelle:{macro:10,mega:8,meso:5},logique:{hierarchique:8,ecosysteme:6,reseau:5},initiateur:{public:10,international:5,mixte:5},financement:{subventions:10,mixte:8,mecenat:4},fonction:{politique:10,recherche:8,formation:7,transfert:6,miseenreseau:5}},r:["Renforcez la coordination entre ministères et agences.","Créez des mécanismes de feedback entre politique et terrain.","Investissez dans les données d'innovation pour piloter le système."]},
-{n:"Centre de transfert technologique",e:"🔬",d:"Structure de valorisation de la recherche : brevets, licences, spin-offs. Pont entre laboratoire et marché.",c:{infrastructure:{labos:10,bureaux:7},echelle:{macro:8,meso:8,mega:4},logique:{reseau:7,cluster:5,hierarchique:4},initiateur:{public:8,mixte:7,prive:4},financement:{subventions:8,prestations:7,production:5,mixte:5},fonction:{transfert:10,recherche:8,incubation:5,formation:3}},r:["Accélérez le time-to-market des technologies transférées.","Développez un réseau de scouts technologiques.","Créez un fonds de maturation pour les preuves de concept."]},
-{n:"Venture Studio / Startup Studio",e:"🧪",d:"Structure créant et lançant ses propres startups en interne, avec équipes, processus et capital dédiés.",c:{infrastructure:{bureaux:10,studio:5},echelle:{macro:8,mega:7,meso:5},logique:{reseau:6,cluster:3,ecosysteme:3},initiateur:{prive:10,mixte:4},financement:{investissements:10,production:5,mixte:4},fonction:{incubation:8,acceleration:8,financement:10,experimentation:6}},r:["Systématisez votre processus de validation d'idées.","Constituez un pool de talents récurrents.","Développez des thèses d'investissement claires."]},
-{n:"Pépinière d'entreprises",e:"🌱",d:"Structure d'accueil pour jeunes entreprises : locaux, services mutualisés et accompagnement de proximité.",c:{infrastructure:{bureaux:10,formation:5,tierslieu:4},echelle:{micro:8,meso:10,macro:3},logique:{reseau:7,hierarchique:3},initiateur:{public:10,mixte:6},financement:{subventions:8,prestations:8,mixte:5},fonction:{hebergement:10,incubation:7,formation:5,miseenreseau:5}},r:["Développez un programme de mentorat.","Créez des synergies entre résidents.","Préparez la sortie de pépinière avec des passerelles."]},
-{n:"Agence d'innovation publique",e:"🏢",d:"Organisme public coordonnant, finançant et promouvant l'innovation au niveau national ou régional.",c:{infrastructure:{bureaux:7,rien:4},echelle:{macro:10,mega:5,meso:7},logique:{hierarchique:10,reseau:5,ecosysteme:3},initiateur:{public:10,international:3},financement:{subventions:10,mixte:5},fonction:{politique:10,financement:8,miseenreseau:6,formation:4,recherche:3}},r:["Simplifiez vos processus de financement.","Développez des indicateurs d'impact au-delà des brevets.","Créez des programmes pour les innovations sociales et frugales."]},
-{n:"Hub créatif / Industrie culturelle",e:"🎨",d:"Lieu dédié aux industries créatives : design, audiovisuel, gaming, arts numériques. Art × technologie × entrepreneuriat.",c:{infrastructure:{studio:10,tierslieu:8,bureaux:6,atelier:5},echelle:{meso:10,macro:5,micro:6},logique:{reseau:9,ecosysteme:5},initiateur:{associatif:7,prive:6,mixte:5,public:4},financement:{prestations:8,subventions:7,mecenat:6,cotisations:4},fonction:{experimentation:8,hebergement:7,miseenreseau:8,formation:6,production:4}},r:["Créez des résidences d'artistes-entrepreneurs.","Développez des ponts entre créatifs et entreprises tech.","Valorisez la propriété intellectuelle produite."]},
-{n:"Plateforme d'innovation ouverte",e:"🔓",d:"Dispositif facilitant la co-innovation entre grandes entreprises et acteurs externes : startups, chercheurs, communautés.",c:{infrastructure:{bureaux:5,rien:6},echelle:{macro:8,mega:7,meso:5},logique:{reseau:10,ecosysteme:6,cluster:3},initiateur:{prive:10,mixte:5},financement:{investissements:7,prestations:6,mixte:6},fonction:{experimentation:8,miseenreseau:9,incubation:5,transfert:5,recherche:4}},r:["Assurez un retour de valeur équitable vers les contributeurs.","Créez des challenges thématiques pour mobiliser l'écosystème.","Mesurez le taux de transformation des projets co-innovés."]},
-{n:"Zone économique spéciale / Zone franche",e:"📍",d:"Territoire à régimes fiscaux et réglementaires avantageux pour attirer investissements et entreprises innovantes.",c:{infrastructure:{usine:8,bureaux:9,labos:5,territoire:7},echelle:{macro:10,mega:7,meso:6},logique:{cluster:7,hierarchique:6,reseau:4},initiateur:{public:10,international:5,mixte:5},financement:{subventions:8,investissements:8,mixte:7},fonction:{hebergement:10,production:7,miseenreseau:5,recherche:4,politique:4}},r:["Développez les services au-delà des avantages fiscaux.","Créez des liens avec l'écosystème local hors zone.","Investissez dans la formation pour retenir les entreprises."]},
-{n:"Centre de recherche appliquée",e:"🧬",d:"Laboratoire orienté résolution de problèmes industriels concrets. Recherche à finalité économique, partenariats privés.",c:{infrastructure:{labos:10,bureaux:6,atelier:4},echelle:{macro:8,meso:8,mega:5},logique:{cluster:6,reseau:6,hierarchique:5},initiateur:{public:7,mixte:8,prive:6},financement:{subventions:7,prestations:7,production:5,mixte:6},fonction:{recherche:10,transfert:8,experimentation:7,formation:4}},r:["Renforcez les contrats de recherche partenariale.","Créez des chaires de recherche co-financées.","Développez un portefeuille de brevets et licences."]},
-{n:"Fondation / Think tank d'innovation",e:"💡",d:"Organisation produisant connaissance, plaidoyer et recommandations sur les politiques d'innovation. Influence et réflexion stratégique.",c:{infrastructure:{bureaux:6,rien:5},echelle:{macro:10,mega:7,meso:4},logique:{reseau:8,hierarchique:4,ecosysteme:3},initiateur:{mixte:7,associatif:6,international:5,public:4},financement:{mecenat:10,subventions:7,prestations:5},fonction:{politique:8,recherche:7,miseenreseau:8,formation:5}},r:["Publiez régulièrement pour asseoir votre expertise.","Diversifiez vos financements pour garantir l'indépendance.","Créez des ponts avec les praticiens pour ancrer vos recommandations."]}
+{n:"Fablab / Makerspace associatif",e:"🔧",d:"Atelier communautaire ouvert à tous, géré par une association. Culture maker, prototypage, partage de compétences. Ancrage local fort.",c:{infrastructure:{atelier:10,tierslieu:5,formation:3},echelle:{micro:10,meso:5},logique:{reseau:10,ecosysteme:2},initiateur:{associatif:10,mixte:3},financement:{cotisations:10,subventions:7,prestations:5,mecenat:3},fonction:{experimentation:10,formation:8,miseenreseau:5},role_systemique:{experimentation:10,diffusion:6,connaissance:5}},r:["Renforcez votre modèle économique par des prestations (formations, locations).","Mutualisez vos achats avec d'autres fablabs via des réseaux régionaux.","Valorisez votre impact social pour obtenir des subventions ESS."]},
+{n:"Pôle de compétitivité / Cluster labellisé",e:"🏛️",d:"Structure labellisée rassemblant grands groupes, PME et laboratoires autour d'une filière stratégique.",c:{infrastructure:{bureaux:8,labos:5,rien:3},echelle:{macro:10,mega:5,meso:3},logique:{cluster:10,reseau:5,ecosysteme:3},initiateur:{public:10,mixte:7,prive:2},financement:{subventions:10,cotisations:8,mixte:5},fonction:{miseenreseau:10,recherche:8,formation:3,acceleration:3},role_systemique:{coordination:10,allocation:6,diffusion:5}},r:["Développez des actions de veille et d'intelligence économique.","Facilitez l'émergence de projets collaboratifs multi-acteurs.","Travaillez votre visibilité internationale pour attirer des investisseurs."]},
+{n:"Incubateur universitaire / académique",e:"🎓",d:"Structure adossée à une université, accompagnant projets de recherche et entrepreneuriat étudiant.",c:{infrastructure:{bureaux:10,labos:7,formation:8},echelle:{meso:10,macro:7,micro:3},logique:{reseau:8,cluster:3,ecosysteme:2},initiateur:{public:10,mixte:5},financement:{subventions:10,mixte:7,mecenat:3},fonction:{incubation:10,formation:8,recherche:5,miseenreseau:3},role_systemique:{connaissance:8,coordination:7,experimentation:5}},r:["Renforcez les liens avec le tissu économique local.","Proposez des formations à l'entrepreneuriat pour étudiants et doctorants.","Mettez en place un fonds d'amorçage académique."]},
+{n:"Accélérateur privé / Corporate",e:"🚀",d:"Programme intensif porté par le privé pour faire croître rapidement des start-up à fort potentiel.",c:{infrastructure:{bureaux:10,formation:7},echelle:{macro:10,mega:8,meso:3},logique:{reseau:8,cluster:3,ecosysteme:2},initiateur:{prive:10,mixte:5},financement:{investissements:10,prestations:3,mixte:5},fonction:{acceleration:10,financement:8,incubation:5,miseenreseau:5},role_systemique:{allocation:10,coordination:7,experimentation:5}},r:["Diversifiez votre réseau de mentors sectoriels.","Organisez des démos days réguliers.","Proposez des programmes thématiques (deep tech, greentech)."]},
+{n:"Living lab territorial",e:"🌿",d:"Dispositif d'expérimentation en conditions réelles avec citoyens, entreprises et chercheurs sur un territoire.",c:{infrastructure:{territoire:10,tierslieu:7,labos:5,bureaux:3},echelle:{meso:10,macro:5,micro:5},logique:{reseau:8,ecosysteme:5,cluster:2},initiateur:{public:10,mixte:7,associatif:3},financement:{subventions:10,mixte:5,prestations:3},fonction:{experimentation:10,miseenreseau:7,recherche:5,formation:3},role_systemique:{experimentation:10,coordination:7,diffusion:5}},r:["Impliquez les citoyens dès la conception des expérimentations.","Documentez et partagez les retours d'expérience.","Créez des passerelles avec d'autres living labs."]},
+{n:"Espace de coworking / Tiers-lieu privé",e:"💼",d:"Lieu de travail partagé avec services, hébergement et mise en relation informelle des professionnels.",c:{infrastructure:{bureaux:10,tierslieu:8,formation:3},echelle:{meso:10,micro:8,macro:2},logique:{reseau:8,ecosysteme:2},initiateur:{prive:10,associatif:3},financement:{prestations:10,cotisations:5,investissements:3},fonction:{hebergement:10,miseenreseau:7,formation:5},role_systemique:{coordination:8,diffusion:5,experimentation:3}},r:["Développez une programmation événementielle pour fidéliser.","Proposez des formules d'abonnement flexibles.","Créez des partenariats avec des entreprises locales."]},
+{n:"Campus d'innovation international",e:"🌐",d:"Grande structure intégrée : recherche, formation, incubation, accélération à rayonnement mondial. Type UM6P, Sophia Antipolis.",c:{infrastructure:{labos:10,bureaux:9,formation:9,atelier:7,tierslieu:6,studio:4},echelle:{mega:10,macro:9,meso:5},logique:{ecosysteme:10,reseau:8,cluster:5},initiateur:{mixte:10,prive:8,public:5},financement:{mixte:10,investissements:8,subventions:5,mecenat:5},fonction:{recherche:10,incubation:9,acceleration:8,formation:8,experimentation:7,miseenreseau:7},role_systemique:{connaissance:10,coordination:8,allocation:7,experimentation:7,diffusion:6}},r:["Capitalisez sur votre rayonnement pour attirer les meilleurs talents.","Développez des chaires de recherche avec des partenaires globaux.","Créez un fonds d'investissement dédié."]},
+{n:"Réseau informel / Communauté",e:"🤝",d:"Pas de lieu physique, fonctionnant par rencontres régulières, adhésion volontaire ou bénévolat.",c:{infrastructure:{rien:10},echelle:{meso:8,macro:5,micro:5},logique:{reseau:10,ecosysteme:3},initiateur:{associatif:10,mixte:3},financement:{cotisations:10,mecenat:3},fonction:{miseenreseau:10,formation:3},role_systemique:{diffusion:10,coordination:7}},r:["Formalisez certains processus (charte, groupes de travail).","Cherchez des financements pour un animateur permanent.","Créez des outils numériques collaboratifs."]},
+{n:"Technopole / Parc scientifique",e:"🏗️",d:"Grand espace aménagé accueillant entreprises innovantes, laboratoires et services mutualisés.",c:{infrastructure:{bureaux:10,labos:9,formation:7,tierslieu:5},echelle:{meso:10,macro:8,mega:3},logique:{reseau:8,cluster:7,ecosysteme:5},initiateur:{public:9,mixte:8,prive:3},financement:{mixte:10,subventions:8,prestations:7},fonction:{hebergement:10,miseenreseau:8,recherche:7,incubation:6},role_systemique:{coordination:8,connaissance:6,diffusion:5}},r:["Ancrez votre projet dans une stratégie territoriale.","Proposez des services mutualisés aux résidents.","Développez une offre de vie autour du parc."]},
+{n:"Centre de formation / Académie d'innovation",e:"📚",d:"Structure dédiée à la montée en compétences et formation professionnelle dans l'innovation et le numérique.",c:{infrastructure:{formation:10,bureaux:6,studio:4},echelle:{meso:8,macro:7,micro:4},logique:{reseau:6,hierarchique:5},initiateur:{prive:7,public:6,mixte:5},financement:{prestations:10,subventions:7,cotisations:4},fonction:{formation:10,miseenreseau:4,experimentation:3},role_systemique:{diffusion:10,connaissance:7,coordination:3}},r:["Certifiez vos formations (labels qualité, reconnaissance nationale).","Développez des programmes en ligne pour étendre votre portée.","Créez des parcours en partenariat avec des universités."]},
+{n:"Tech Hub / Hub technologique",e:"⚡",d:"Espace concentrant startups tech, développeurs et entrepreneurs numériques. Axé sur l'écosystème tech local.",c:{infrastructure:{bureaux:10,formation:7,tierslieu:6,studio:4},echelle:{meso:10,macro:7,mega:4},logique:{ecosysteme:7,reseau:8,cluster:4},initiateur:{prive:10,mixte:5,associatif:3},financement:{prestations:8,investissements:7,mixte:5,cotisations:4},fonction:{hebergement:8,incubation:7,miseenreseau:8,formation:6,acceleration:5},role_systemique:{coordination:9,diffusion:7,experimentation:5}},r:["Positionnez-vous comme vitrine du talent tech local.","Développez des partenariats internationaux.","Organisez des hackathons réguliers pour animer la communauté."]},
+{n:"Cluster technologique",e:"🔗",d:"Concentration géographique d'entreprises tech, fournisseurs spécialisés et institutions associées dans un secteur de pointe.",c:{infrastructure:{bureaux:8,labos:7,usine:5},echelle:{meso:10,macro:8,mega:4},logique:{cluster:10,reseau:6,ecosysteme:4},initiateur:{prive:8,public:6,mixte:7},financement:{mixte:8,investissements:7,subventions:6,prestations:4},fonction:{recherche:8,production:7,miseenreseau:7,transfert:6,formation:4},role_systemique:{coordination:10,connaissance:6,diffusion:5}},r:["Renforcez les liens dans la chaîne de valeur entre entreprises.","Développez une marque territoriale forte.","Investissez dans la formation spécialisée."]},
+{n:"District industriel",e:"🏭",d:"Système productif local de PME spécialisées coopérant dans un même secteur, avec fort enracinement socio-culturel.",c:{infrastructure:{usine:10,bureaux:5,formation:3},echelle:{meso:10,macro:5,micro:7},logique:{cluster:10,reseau:5,ecosysteme:3},initiateur:{prive:10,associatif:4,public:3},financement:{production:10,prestations:5,cotisations:4},fonction:{production:10,miseenreseau:6,formation:4,experimentation:3},role_systemique:{connaissance:7,coordination:6,experimentation:5}},r:["Modernisez votre base productive avec des technologies numériques.","Créez un centre de design et d'innovation partagé.","Renforcez les liens avec les universités."]},
+{n:"Écosystème d'innovation territorial",e:"🌍",d:"Système auto-organisé rassemblant entreprises, universités et institutions sur un territoire. Dynamique émergente et vertueuse.",c:{infrastructure:{bureaux:8,labos:8,formation:7,tierslieu:7,atelier:5},echelle:{meso:10,macro:9,mega:6},logique:{ecosysteme:10,reseau:8,cluster:6},initiateur:{mixte:10,public:7,prive:7,associatif:4},financement:{mixte:10,investissements:7,subventions:7,prestations:5},fonction:{miseenreseau:10,incubation:8,recherche:8,formation:7,acceleration:6,experimentation:6},role_systemique:{coordination:10,diffusion:9,connaissance:7,experimentation:6,allocation:5}},r:["Documentez et rendez visible la dynamique émergente.","Créez des espaces de gouvernance partagée multi-acteurs.","Investissez dans des indicateurs d'impact systémique."]},
+{n:"Système national d'innovation",e:"🗺️",d:"Ensemble des institutions, politiques et flux de connaissance déterminant la capacité d'innovation d'un pays.",c:{infrastructure:{labos:7,bureaux:5,formation:7,territoire:5},echelle:{macro:10,mega:8,meso:5},logique:{hierarchique:8,ecosysteme:6,reseau:5},initiateur:{public:10,international:5,mixte:5},financement:{subventions:10,mixte:8,mecenat:4},fonction:{politique:10,recherche:8,formation:7,transfert:6,miseenreseau:5},role_systemique:{allocation:10,coordination:9,diffusion:7,connaissance:6}},r:["Renforcez la coordination entre ministères et agences.","Créez des mécanismes de feedback entre politique et terrain.","Investissez dans les données d'innovation pour piloter le système."]},
+{n:"Centre de transfert technologique",e:"🔬",d:"Structure de valorisation de la recherche : brevets, licences, spin-offs. Pont entre laboratoire et marché.",c:{infrastructure:{labos:10,bureaux:7},echelle:{macro:8,meso:8,mega:4},logique:{reseau:7,cluster:5,hierarchique:4},initiateur:{public:8,mixte:7,prive:4},financement:{subventions:8,prestations:7,production:5,mixte:5},fonction:{transfert:10,recherche:8,incubation:5,formation:3},role_systemique:{connaissance:10,diffusion:8,allocation:5}},r:["Accélérez le time-to-market des technologies transférées.","Développez un réseau de scouts technologiques.","Créez un fonds de maturation pour les preuves de concept."]},
+{n:"Venture Studio / Startup Studio",e:"🧪",d:"Structure créant et lançant ses propres startups en interne, avec équipes, processus et capital dédiés.",c:{infrastructure:{bureaux:10,studio:5},echelle:{macro:8,mega:7,meso:5},logique:{reseau:6,cluster:3,ecosysteme:3},initiateur:{prive:10,mixte:4},financement:{investissements:10,production:5,mixte:4},fonction:{incubation:8,acceleration:8,financement:10,experimentation:6},role_systemique:{allocation:10,experimentation:8,coordination:5}},r:["Systématisez votre processus de validation d'idées.","Constituez un pool de talents récurrents.","Développez des thèses d'investissement claires."]},
+{n:"Pépinière d'entreprises",e:"🌱",d:"Structure d'accueil pour jeunes entreprises : locaux, services mutualisés et accompagnement de proximité.",c:{infrastructure:{bureaux:10,formation:5,tierslieu:4},echelle:{micro:8,meso:10,macro:3},logique:{reseau:7,hierarchique:3},initiateur:{public:10,mixte:6},financement:{subventions:8,prestations:8,mixte:5},fonction:{hebergement:10,incubation:7,formation:5,miseenreseau:5},role_systemique:{coordination:8,experimentation:5,diffusion:4}},r:["Développez un programme de mentorat.","Créez des synergies entre résidents.","Préparez la sortie de pépinière avec des passerelles."]},
+{n:"Agence d'innovation publique",e:"🏢",d:"Organisme public coordonnant, finançant et promouvant l'innovation au niveau national ou régional.",c:{infrastructure:{bureaux:7,rien:4},echelle:{macro:10,mega:5,meso:7},logique:{hierarchique:10,reseau:5,ecosysteme:3},initiateur:{public:10,international:3},financement:{subventions:10,mixte:5},fonction:{politique:10,financement:8,miseenreseau:6,formation:4,recherche:3},role_systemique:{allocation:10,coordination:8,diffusion:6}},r:["Simplifiez vos processus de financement.","Développez des indicateurs d'impact au-delà des brevets.","Créez des programmes pour les innovations sociales et frugales."]},
+{n:"Hub créatif / Industrie culturelle",e:"🎨",d:"Lieu dédié aux industries créatives : design, audiovisuel, gaming, arts numériques. Art × technologie × entrepreneuriat.",c:{infrastructure:{studio:10,tierslieu:8,bureaux:6,atelier:5},echelle:{meso:10,macro:5,micro:6},logique:{reseau:9,ecosysteme:5},initiateur:{associatif:7,prive:6,mixte:5,public:4},financement:{prestations:8,subventions:7,mecenat:6,cotisations:4},fonction:{experimentation:8,hebergement:7,miseenreseau:8,formation:6,production:4},role_systemique:{experimentation:9,diffusion:8,coordination:5}},r:["Créez des résidences d'artistes-entrepreneurs.","Développez des ponts entre créatifs et entreprises tech.","Valorisez la propriété intellectuelle produite."]},
+{n:"Plateforme d'innovation ouverte",e:"🔓",d:"Dispositif facilitant la co-innovation entre grandes entreprises et acteurs externes : startups, chercheurs, communautés.",c:{infrastructure:{bureaux:5,rien:6},echelle:{macro:8,mega:7,meso:5},logique:{reseau:10,ecosysteme:6,cluster:3},initiateur:{prive:10,mixte:5},financement:{investissements:7,prestations:6,mixte:6},fonction:{experimentation:8,miseenreseau:9,incubation:5,transfert:5,recherche:4},role_systemique:{coordination:10,experimentation:8,diffusion:6}},r:["Assurez un retour de valeur équitable vers les contributeurs.","Créez des challenges thématiques pour mobiliser l'écosystème.","Mesurez le taux de transformation des projets co-innovés."]},
+{n:"Zone économique spéciale / Zone franche",e:"📍",d:"Territoire à régimes fiscaux et réglementaires avantageux pour attirer investissements et entreprises innovantes.",c:{infrastructure:{usine:8,bureaux:9,labos:5,territoire:7},echelle:{macro:10,mega:7,meso:6},logique:{cluster:7,hierarchique:6,reseau:4},initiateur:{public:10,international:5,mixte:5},financement:{subventions:8,investissements:8,mixte:7},fonction:{hebergement:10,production:7,miseenreseau:5,recherche:4,politique:4},role_systemique:{allocation:9,coordination:7,diffusion:4}},r:["Développez les services au-delà des avantages fiscaux.","Créez des liens avec l'écosystème local hors zone.","Investissez dans la formation pour retenir les entreprises."]},
+{n:"Centre de recherche appliquée",e:"🧬",d:"Laboratoire orienté résolution de problèmes industriels concrets. Recherche à finalité économique, partenariats privés.",c:{infrastructure:{labos:10,bureaux:6,atelier:4},echelle:{macro:8,meso:8,mega:5},logique:{cluster:6,reseau:6,hierarchique:5},initiateur:{public:7,mixte:8,prive:6},financement:{subventions:7,prestations:7,production:5,mixte:6},fonction:{recherche:10,transfert:8,experimentation:7,formation:4},role_systemique:{connaissance:10,experimentation:8,diffusion:5}},r:["Renforcez les contrats de recherche partenariale.","Créez des chaires de recherche co-financées.","Développez un portefeuille de brevets et licences."]},
+{n:"Fondation / Think tank d'innovation",e:"💡",d:"Organisation produisant connaissance, plaidoyer et recommandations sur les politiques d'innovation. Influence et réflexion stratégique.",c:{infrastructure:{bureaux:6,rien:5},echelle:{macro:10,mega:7,meso:4},logique:{reseau:8,hierarchique:4,ecosysteme:3},initiateur:{mixte:7,associatif:6,international:5,public:4},financement:{mecenat:10,subventions:7,prestations:5},fonction:{politique:8,recherche:7,miseenreseau:8,formation:5},role_systemique:{diffusion:10,connaissance:8,coordination:5}},r:["Publiez régulièrement pour asseoir votre expertise.","Diversifiez vos financements pour garantir l'indépendance.","Créez des ponts avec les praticiens pour ancrer vos recommandations."]}
 ];
 
 // Marquee
@@ -307,13 +277,12 @@ mq1.innerHTML=[...row1,...row1,...row1].map(chipHTML).join('');
 mq2.innerHTML=[...row2,...row2,...row2].map(chipHTML).join('');
 
 // State
-let answers={};questions.forEach(q=>{answers[q.name]=[];});let ci=0;let institutionName='';
+let answers={};questions.forEach(q=>{answers[q.name]=[];});let ci=0;
 const $=id=>document.getElementById(id);
 const landingPage=$('landingPage'),diagPage=$('diagPage'),qSection=$('qSection'),diagCard=$('diagCard');
 const dPrev=$('dPrev'),dNext=$('dNext'),diagNav=$('diagNav');
 const diagLabel=$('diagLabel'),diagStep=$('diagStep'),diagFill=$('diagFill'),diagMini=$('diagMini');
 const diagProgressBar=$('diagProgressBar'),diagDots=$('diagDots'),resSection=$('resSection'),toastEl=$('toastEl');
-const nameOverlay=$('nameOverlay'),nameInput=$('nameInput'),nameSkip=$('nameSkip'),nameConfirm=$('nameConfirm');
 
 window.startDiagnostic=function(){landingPage.style.display='none';diagPage.classList.add('active');window.scrollTo(0,0);renderQ(ci);};
 window.backToLanding=function(){diagPage.classList.remove('active');landingPage.style.display='';window.scrollTo(0,0);};
@@ -326,9 +295,9 @@ function toast(m){toastEl.textContent=m;toastEl.classList.add('on');setTimeout((
 function renderQ(idx,dir){
     const q=questions[idx],saved=answers[q.name];
     if(dir){qSection.classList.add(dir==='next'?'slide-out-l':'slide-out-r');setTimeout(()=>{buildQ(q,saved);qSection.className='q-section '+(dir==='next'?'slide-in-r':'slide-in-l');setTimeout(()=>qSection.className='q-section',300);},220);}else buildQ(q,saved);
-    diagLabel.textContent=q.label;diagStep.textContent=`${idx+1} sur 6`;diagMini.textContent=`${idx+1} / 6`;diagFill.style.width=`${((idx+1)/6)*100}%`;
+    diagLabel.textContent=q.label;diagStep.textContent=`${idx+1} sur 7`;diagMini.textContent=`${idx+1} / 7`;diagFill.style.width=`${((idx+1)/7)*100}%`;
     diagDots.querySelectorAll('.diag-dot').forEach((d,i)=>{d.className='diag-dot';if(i<idx)d.classList.add('done');if(i===idx)d.classList.add('active');});
-    dPrev.disabled=idx===0;dNext.innerHTML=idx===5?'Voir le diagnostic ✦':'Suivant →';
+    dPrev.disabled=idx===0;dNext.innerHTML=idx===6?'Voir le diagnostic ✦':'Suivant →';
 }
 function buildQ(q,saved){
     let h=`<span class="q-tag">Question ${q.id}</span><h2 class="q-title">${q.title}</h2><p class="q-hint">${q.hint}</p><div class="q-options">`;
@@ -345,11 +314,7 @@ function rerank(qn){answers[qn].sort((a,b)=>a.rank-b.rank).forEach((a,i)=>{a.ran
 function refresh(qn){document.querySelectorAll('.q-opt').forEach(el=>{const v=el.dataset.v,it=answers[qn].find(a=>a.value===v),on=!!it;el.classList.toggle('on',on);const num=el.querySelector('.q-rank-num');if(num)num.textContent=on?it.rank:'';const ru=el.querySelector('.ru'),rd=el.querySelector('.rd');if(ru)ru.disabled=!on||it.rank===1;if(rd)rd.disabled=!on||it.rank===answers[qn].length;});}
 
 dPrev.addEventListener('click',()=>{if(ci>0){ci--;renderQ(ci,'prev');}});
-dNext.addEventListener('click',()=>{if(!answers[questions[ci].name].length){toast('Sélectionnez au moins une option');return;}if(ci<5){ci++;renderQ(ci,'next');}else{nameOverlay.classList.add('open');nameInput.value=institutionName;setTimeout(()=>nameInput.focus(),350);}});
-
-nameInput.addEventListener('keydown',e=>{if(e.key==='Enter'){institutionName=nameInput.value.trim();nameOverlay.classList.remove('open');showResult();}});
-nameSkip.addEventListener('click',()=>{institutionName='';nameOverlay.classList.remove('open');showResult();});
-nameConfirm.addEventListener('click',()=>{institutionName=nameInput.value.trim();nameOverlay.classList.remove('open');showResult();});
+dNext.addEventListener('click',()=>{if(!answers[questions[ci].name].length){toast('Sélectionnez au moins une option');return;}if(ci<6){ci++;renderQ(ci,'next');}else showResult();});
 
 function score(p){let t=0,mx=0;for(let d in p.c){const pd=p.c[d],rd=answers[d]||[];if(!rd.length)continue;rd.forEach(r=>{t+=(pd[r.value]||0)*(1/r.rank);});const tv=Object.values(pd).sort((a,b)=>b-a).slice(0,rd.length);mx+=tv.reduce((s,v)=>s+v,0);}return mx>0?(t/mx)*100:0;}
 
@@ -362,9 +327,7 @@ function showResult(){
     if(answers.financement?.some(f=>f.value==='subventions'&&f.rank===1))recos.push("Diversifiez vos ressources pour réduire la dépendance aux subventions.");
     if(answers.echelle?.some(e=>e.value==='micro'&&e.rank===1)&&answers.infrastructure?.some(i=>i.value==='rien'))recos.push("Envisagez un lieu physique, même temporaire, pour fédérer votre communauté.");
 
-    let h=`<div class="res-hero"><div class="res-badge">✦ Diagnostic terminé</div>`;
-    if(institutionName) h+=`<p style="font-size:15px;color:var(--text-3);margin-bottom:8px;font-weight:500;letter-spacing:.5px;text-transform:uppercase">${institutionName}</p>`;
-    h+=`<div class="res-name">${best.p.e} ${best.p.n}</div><div class="res-score">${best.s.toFixed(0)}%</div><div class="res-score-label">Correspondance</div><p class="res-desc">${best.p.d}</p></div>`;
+    let h=`<div class="res-hero"><div class="res-badge">✦ Diagnostic terminé</div><div class="res-name">${best.p.e} ${best.p.n}</div><div class="res-score">${best.s.toFixed(0)}%</div><div class="res-score-label">Correspondance</div><p class="res-desc">${best.p.d}</p></div>`;
     if(best.s<30)h+=`<div class="alt-banner"><span style="font-size:20px">⚠️</span><p>Profil très spécifique ou hybride — le diagnostic est une approximation. Votre institution combine probablement plusieurs typologies.</p></div>`;
     if(amb)h+=`<div class="alt-banner"><span style="font-size:20px">🔄</span><p>Profil proche : <strong>${sec.p.e} ${sec.p.n}</strong> — ${sec.s.toFixed(0)}%. Votre institution présente des caractéristiques hybrides.</p></div>`;
     h+=`<div class="res-card"><div class="res-card-head"><div class="res-card-ico gold">📊</div><div class="res-card-title">Correspondances les plus proches</div></div>`;
@@ -376,145 +339,144 @@ function showResult(){
     h+=`<div class="res-card"><div class="res-card-head"><div class="res-card-ico gray">📋</div><div class="res-card-title">Récapitulatif</div></div><ul>`;
     questions.forEach(q=>{const reps=(answers[q.name]||[]).sort((a,b)=>a.rank-b.rank);h+=`<li style="flex-direction:column;gap:6px"><strong style="color:var(--text-1)">${q.label}</strong>`;if(reps.length){h+=`<div class="summary-tags">${reps.map((r,i)=>{const o=q.options.find(o=>o.value===r.value);return`<span class="s-tag ${i===0?'main':''}">${o?o.label:r.value}</span>`;}).join('')}</div>`;}else h+='<span style="font-size:13px;color:var(--text-3)">Non renseigné</span>';h+='</li>';});
     h+='</ul></div>';
-    h+=`<button class="btn-share" id="shareBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg> Exporter l'image de partage</button>`;
+    h+=`<div class="name-input-wrap"><label>🏷️ Nom de votre structure <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--text-3)">(optionnel)</span></label><input type="text" id="institutionName" placeholder="Ex : IBUDO Innovation Hub, Sème City…" maxlength="60"><p class="name-input-hint">Ce nom apparaîtra sur l'image de partage.</p></div>`;
+    h+=`<button class="btn-export" id="btnExport"><span>↓</span> Exporter en image</button>`;
     h+=`<button class="btn-reset-full" id="resetFull">↻ Nouveau diagnostic</button>`;
     resSection.innerHTML=h;resSection.classList.add('show');
     setTimeout(()=>{resSection.querySelectorAll('.bar-fill').forEach(b=>{const w=b.style.width;b.style.width='0%';setTimeout(()=>{b.style.width=w;},80);});},300);
     $('resetFull').addEventListener('click',resetAll);
-    $('shareBtn').addEventListener('click',()=>generateShareImage(best,sc.slice(0,4)));
+    $('btnExport').addEventListener('click',()=>generateShareCard(best,sc.slice(0,3)));
     window.scrollTo({top:0,behavior:'smooth'});
 }
 
-// ==================== CANVAS IMAGE GENERATION ====================
-function generateShareImage(best,topScores){
-    const canvas=$('shareCanvas');
-    const dpr=2;
-    const W=1080,H=1350;
-    canvas.width=W*dpr;canvas.height=H*dpr;
-    canvas.style.width=W+'px';canvas.style.height=H+'px';
-    const ctx=canvas.getContext('2d');
-    ctx.scale(dpr,dpr);
+function generateShareCard(best, top3){
+    const name = ($('institutionName')?.value||'').trim();
+    const W=1080,H=1080;
+    const canvas=document.createElement('canvas');
+    canvas.width=W;canvas.height=H;
+    const c=canvas.getContext('2d');
 
-    // Background
-    const bgGrad=ctx.createLinearGradient(0,0,0,H);
-    bgGrad.addColorStop(0,'#0F0F0F');bgGrad.addColorStop(0.6,'#141412');bgGrad.addColorStop(1,'#1A1917');
-    ctx.fillStyle=bgGrad;ctx.fillRect(0,0,W,H);
+    // Fond sombre
+    c.fillStyle='#0F0F0F';c.fillRect(0,0,W,H);
 
-    // Subtle gold glow
-    const glow=ctx.createRadialGradient(200,250,0,200,250,500);
-    glow.addColorStop(0,'rgba(200,165,92,0.06)');glow.addColorStop(1,'transparent');
-    ctx.fillStyle=glow;ctx.fillRect(0,0,W,H);
-
-    const gold='#C8A55C',cream='#F7F5F0',muted='#7A7770',border='#2E2D2A';
-    const px=72,contentW=W-px*2;
-
-    // Top badge
-    ctx.fillStyle=gold;ctx.globalAlpha=0.15;
-    roundRect(ctx,px,72,220,36,18);ctx.fill();
-    ctx.globalAlpha=1;ctx.fillStyle=gold;ctx.font='600 13px Satoshi,sans-serif';ctx.textBaseline='middle';
-    ctx.fillText('✦  DIAGNOSTIC D\'INNOVATION',px+16,72+18);
-
-    // Institution name
-    let yPos=148;
-    if(institutionName){
-        ctx.fillStyle=cream;ctx.font='400 52px "Instrument Serif",Georgia,serif';ctx.textBaseline='top';
-        ctx.fillText(institutionName,px,yPos);
-        yPos+=72;
+    // Grain subtil
+    for(let i=0;i<18000;i++){
+        const x=Math.random()*W,y=Math.random()*H;
+        c.fillStyle=`rgba(255,255,255,${Math.random()*0.025})`;
+        c.fillRect(x,y,1,1);
     }
 
-    // "est un(e)" connector
-    ctx.fillStyle=muted;ctx.font='300 20px Satoshi,sans-serif';ctx.textBaseline='top';
-    ctx.fillText(institutionName?'correspond au profil':'Votre profil',px,yPos);
-    yPos+=40;
+    // Lueur dorée en haut à gauche
+    const grd=c.createRadialGradient(200,200,0,200,200,500);
+    grd.addColorStop(0,'rgba(200,165,92,0.10)');
+    grd.addColorStop(1,'rgba(200,165,92,0)');
+    c.fillStyle=grd;c.fillRect(0,0,W,H);
 
-    // Profile name
-    ctx.fillStyle=cream;ctx.font='400 42px "Instrument Serif",Georgia,serif';
-    const profileText=best.p.e+'  '+best.p.n;
-    wrapText(ctx,profileText,px,yPos,contentW,50);
-    yPos+=ctx._lastWrapHeight+24;
+    // Ligne dorée top
+    c.strokeStyle='#C8A55C';c.lineWidth=2;
+    c.beginPath();c.moveTo(80,80);c.lineTo(W-80,80);c.stroke();
 
-    // Big score
-    ctx.fillStyle=gold;ctx.font='400 120px "Instrument Serif",Georgia,serif';
-    ctx.fillText(best.s.toFixed(0)+'%',px,yPos);
-    yPos+=130;
-    ctx.fillStyle=muted;ctx.font='600 14px Satoshi,sans-serif';ctx.letterSpacing='3px';
-    ctx.fillText('CORRESPONDANCE',px,yPos);
-    yPos+=56;
+    // Badge "Diagnostic · Innovation"
+    c.font='600 22px Satoshi, sans-serif';
+    c.fillStyle='#C8A55C';
+    c.letterSpacing='3px';
+    c.fillText('DIAGNOSTIC · INNOVATION', 80, 130);
+    c.letterSpacing='0px';
 
-    // Separator
-    ctx.fillStyle=border;ctx.fillRect(px,yPos,contentW,1);
-    yPos+=40;
+    // Emoji profil
+    c.font='72px serif';
+    c.fillText(best.p.e, 80, 260);
 
-    // Description
-    ctx.fillStyle=muted;ctx.font='300 18px Satoshi,sans-serif';
-    wrapText(ctx,best.p.d,px,yPos,contentW,26);
-    yPos+=ctx._lastWrapHeight+44;
+    // Nom institution (si renseigné)
+    if(name){
+        c.font='500 32px Satoshi, sans-serif';
+        c.fillStyle='rgba(250,250,248,0.55)';
+        c.fillText(name.toUpperCase(), 80, 320);
+    }
 
-    // Separator
-    ctx.fillStyle=border;ctx.fillRect(px,yPos,contentW,1);
-    yPos+=40;
-
-    // Top matches heading
-    ctx.fillStyle=cream;ctx.font='400 26px "Instrument Serif",Georgia,serif';
-    ctx.fillText('Correspondances',px,yPos);
-    yPos+=42;
-
-    // Score bars
-    topScores.forEach((s,i)=>{
-        const barH=8,barW=contentW-200,labelY=yPos;
-        const pct=s.s/100;
-        const alphas=[1,0.7,0.45,0.3];
-        // Name
-        ctx.fillStyle=i===0?cream:muted;ctx.font=(i===0?'500':'400')+' 16px Satoshi,sans-serif';
-        ctx.fillText(s.p.e+' '+s.p.n.split('/')[0].trim(),px,labelY);
-        // Percentage
-        ctx.fillStyle=i===0?gold:muted;ctx.font='600 16px Satoshi,sans-serif';ctx.textAlign='right';
-        ctx.fillText(s.s.toFixed(0)+'%',W-px,labelY);ctx.textAlign='left';
-        // Bar track
-        yPos+=14;
-        ctx.fillStyle='#252420';roundRect(ctx,px,yPos,contentW,barH,4);ctx.fill();
-        // Bar fill
-        ctx.fillStyle=gold;ctx.globalAlpha=alphas[i];
-        if(pct>0){roundRect(ctx,px,yPos,Math.max(contentW*pct,barH),barH,4);ctx.fill();}
-        ctx.globalAlpha=1;
-        yPos+=barH+24;
+    // Nom du profil
+    c.font='italic 700 76px Georgia, serif';
+    c.fillStyle='#FAFAF8';
+    const pname = best.p.n;
+    // Wrap si trop long
+    const words=pname.split(' ');let line='';let y=name?430:390;
+    const maxW=W-160;
+    words.forEach((w,i)=>{
+        const test=line+(line?' ':'')+w;
+        c.font='italic 700 72px Georgia, serif';
+        if(c.measureText(test).width>maxW&&line){
+            c.fillText(line,80,y);line=w;y+=90;
+        } else line=test;
+        if(i===words.length-1)c.fillText(line,80,y);
     });
 
-    // Bottom copyright area
-    const footerY=H-60;
-    ctx.fillStyle=border;ctx.fillRect(px,footerY-20,contentW,1);
-    ctx.fillStyle=muted;ctx.globalAlpha=0.5;ctx.font='400 13px Satoshi,sans-serif';
-    ctx.fillText('diagnostic.innovation · IBUDO · '+new Date().getFullYear(),px,footerY+6);
-    ctx.textAlign='right';
-    ctx.fillText('hermas-ayi.github.io/diagnostic-innovation',W-px,footerY+6);
-    ctx.textAlign='left';ctx.globalAlpha=1;
+    // Score
+    const scoreY = y+100;
+    c.font='700 120px Georgia, serif';
+    const grad2=c.createLinearGradient(80,scoreY-100,200,scoreY);
+    grad2.addColorStop(0,'#C8A55C');grad2.addColorStop(1,'#A88940');
+    c.fillStyle=grad2;
+    c.fillText(`${best.s.toFixed(0)}%`, 80, scoreY);
+    c.font='500 24px Satoshi, sans-serif';
+    c.fillStyle='rgba(250,250,248,0.45)';
+    c.fillText('de correspondance', 80, scoreY+38);
 
-    // Download
-    canvas.toBlob(blob=>{
-        const url=URL.createObjectURL(blob);
-        const a=document.createElement('a');
-        a.href=url;
-        a.download='diagnostic-'+(institutionName||'institution').toLowerCase().replace(/[^a-z0-9]/gi,'-')+'.png';
-        document.body.appendChild(a);a.click();document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-        toast('Image téléchargée !');
-    },'image/png');
+    // Séparateur
+    const sepY=scoreY+80;
+    c.strokeStyle='rgba(200,165,92,0.3)';c.lineWidth=1;
+    c.beginPath();c.moveTo(80,sepY);c.lineTo(W-80,sepY);c.stroke();
+
+    // Top 3 correspondances
+    c.font='600 18px Satoshi, sans-serif';
+    c.fillStyle='rgba(200,165,92,0.8)';
+    c.letterSpacing='1.5px';
+    c.fillText('CORRESPONDANCES', 80, sepY+42);
+    c.letterSpacing='0px';
+    top3.forEach((s,i)=>{
+        const ty=sepY+82+i*52;
+        // Bar background
+        c.fillStyle='rgba(255,255,255,0.05)';
+        roundRect(c,80,ty,W-160,34,6);c.fill();
+        // Bar fill
+        const bw=(W-160)*(s.s/100);
+        c.fillStyle=i===0?'rgba(200,165,92,0.35)':'rgba(200,165,92,0.12)';
+        roundRect(c,80,ty,bw,34,6);c.fill();
+        // Label
+        c.font=`${i===0?'600':'400'} 18px Satoshi, sans-serif`;
+        c.fillStyle=i===0?'#FAFAF8':'rgba(250,250,248,0.6)';
+        c.fillText(`${s.p.e}  ${s.p.n}`, 94, ty+22);
+        // Score
+        c.font='600 18px Satoshi, sans-serif';
+        c.fillStyle=i===0?'#C8A55C':'rgba(200,165,92,0.6)';
+        const pct=`${s.s.toFixed(0)}%`;
+        c.fillText(pct, W-80-c.measureText(pct).width-14, ty+22);
+    });
+
+    // Ligne bottom
+    c.strokeStyle='#C8A55C';c.lineWidth=2;
+    c.beginPath();c.moveTo(80,H-80);c.lineTo(W-80,H-80);c.stroke();
+
+    // Copyright discret
+    c.font='400 18px Satoshi, sans-serif';
+    c.fillStyle='rgba(250,250,248,0.25)';
+    c.fillText('Par Hermas · IBUDO Innovation Hub', 80, H-44);
+    c.fillStyle='rgba(200,165,92,0.4)';
+    const url='hermas-ayi.github.io/d-innovation';
+    c.fillText(url, W-80-c.measureText(url).width, H-44);
+
+    // Téléchargement
+    const link=document.createElement('a');
+    link.download=`diagnostic-${(name||best.p.n).toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'')}.png`;
+    link.href=canvas.toDataURL('image/png');
+    link.click();
+    toast('Image téléchargée ✦');
 }
 
-// Canvas helpers
-function roundRect(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);ctx.lineTo(x+r,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h-r);ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.closePath();}
-
-function wrapText(ctx,text,x,y,maxW,lineH){
-    const words=text.split(' ');let line='';let lines=0;
-    for(let i=0;i<words.length;i++){
-        const test=line+words[i]+' ';
-        if(ctx.measureText(test).width>maxW&&i>0){ctx.fillText(line.trim(),x,y);y+=lineH;line=words[i]+' ';lines++;}
-        else line=test;
-    }
-    ctx.fillText(line.trim(),x,y);lines++;
-    ctx._lastWrapHeight=lines*lineH;
+function roundRect(ctx,x,y,w,h,r){
+    ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);ctx.lineTo(x+r,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h-r);ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.closePath();
 }
-function resetAll(){questions.forEach(q=>{answers[q.name]=[];});ci=0;institutionName='';resSection.classList.remove('show');resSection.innerHTML='';diagCard.style.display='';diagNav.style.display='';diagProgressBar.style.display='';diagDots.style.display='';renderQ(0);window.scrollTo({top:0,behavior:'smooth'});}
+
+function resetAll(){questions.forEach(q=>{answers[q.name]=[];});ci=0;resSection.classList.remove('show');resSection.innerHTML='';diagCard.style.display='';diagNav.style.display='';diagProgressBar.style.display='';diagDots.style.display='';renderQ(0);window.scrollTo({top:0,behavior:'smooth'});}
 renderQ(0);
 })();
 </script>
